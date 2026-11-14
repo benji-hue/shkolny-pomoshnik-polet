@@ -265,6 +265,7 @@ body.tone-dark #mailtag { background: rgba(10, 16, 36, .74); color: #f4f1ea; box
 .s-div .dl { margin-top: 30px; max-width: 760px; color: var(--fg2); }
 .route-map { position: absolute; left: 120px; right: 120px; bottom: 112px; height: 120px; }
 .route-map svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.s-div-day .route-map { right: 900px; }
 .rm-line { fill: none; stroke: var(--line); stroke-width: 2; stroke-dasharray: 2 12; stroke-linecap: round; }
 .rm-done { fill: none; stroke: var(--acc); stroke-width: 3; stroke-linecap: round; }
 .rm-dot { fill: none; stroke: var(--fg2); stroke-width: 2.5; }
@@ -274,7 +275,7 @@ body.tone-dark #mailtag { background: rgba(10, 16, 36, .74); color: #f4f1ea; box
 .rm-label.is-cur { fill: var(--fg); font-weight: 600; }
 .rm-plane path { fill: var(--fg); }
 /* письмо с фото на «Моей родине» */
-.letter { position: absolute; left: 880px; top: 250px; width: 720px; padding: 26px 26px 22px; border-radius: 6px; opacity: 0;
+.letter { position: absolute; left: 880px; top: 196px; width: 680px; padding: 26px 26px 22px; border-radius: 6px; opacity: 0;
   transform: rotate(-6deg); color: #15171c;
   background:
     linear-gradient(90deg, transparent 49.7%, rgba(20, 24, 40, .07) 50%, rgba(255, 255, 255, .55) 50.3%, transparent 50.8%),

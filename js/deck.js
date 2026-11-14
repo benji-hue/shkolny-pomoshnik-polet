@@ -157,8 +157,8 @@
   var SVGNS = "http://www.w3.org/2000/svg";
   function svgEl(name, attrs, parent) { var e = document.createElementNS(SVGNS, name); for (var k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; }
   function buildRoute(box) {
-    var cur = +box.dataset.chi, svg = svgEl("svg", { viewBox: "0 0 1680 120", preserveAspectRatio: "none" }, box);
-    var d = "M 30 78 Q 840 -14 1650 78";
+    var cur = +box.dataset.chi, W0 = box.offsetWidth || 1680, svg = svgEl("svg", { viewBox: "0 0 " + W0 + " 120" }, box);
+    var d = "M 30 78 Q " + (W0 / 2) + " -14 " + (W0 - 30) + " 78";
     svgEl("path", { d: d, "class": "rm-line" }, svg);
     var done = svgEl("path", { d: d, "class": "rm-done" }, svg);
     var len = done.getTotalLength(), fr = [0.03, 0.27, 0.5, 0.73, 0.97];
@@ -186,6 +186,12 @@
   slides.forEach(function (el) { var b = el.querySelector(".route-map"); if (b) buildRoute(b); });
 
   var MAIL = {
+    cover: function (t, at) {
+      var p = POSES.cover;
+      arrive(t, at, { x: 960, y: 420, d: 32, s: p.s });
+      t.to(P, { x: p.x, y: p.y, d: p.d, s: p.s, duration: 1.6, ease: "power3.out" }, at);
+      t.to(P, { idle: 1, duration: 0.8 }, at + 1.2);
+    },
     goal: function (t, at) { // правило показа: вот так выглядит сообщение
       var p = POSES.goal;
       arrive(t, at, { x: 960, y: 420, d: 32, s: p.s });
@@ -258,9 +264,9 @@
       t.to(P, { show: 0, duration: 0.8 }, a + 5.2);
     },
     hero: function (t, at) { // огромный самолётик пролетает перед заголовком главы
-      arrive(t, at + 0.2, { x: -460, y: 720, d: 9, s: 3.1 });
-      fly(t, at + 0.2, [{ x: -460, y: 720, d: 9, s: 3.1 }, { x: 520, y: 600, d: 9, s: 3.1 }, { x: 1320, y: 470, d: 9, s: 3.0 }, { x: 2500, y: 330, d: 10, s: 2.8 }], 7.5, "sine.inOut");
-      t.to(P, { show: 0, duration: 0.2 }, at + 7.6);
+      arrive(t, at + 0.2, { x: -420, y: 560, d: 9, s: 2.5 });
+      fly(t, at + 0.2, [{ x: -420, y: 560, d: 9, s: 2.5 }, { x: 480, y: 380, d: 9, s: 2.5 }, { x: 1250, y: 300, d: 9, s: 2.4 }, { x: 2450, y: 170, d: 10, s: 2.2 }], 7.0, "sine.inOut");
+      t.to(P, { show: 0, duration: 0.2 }, at + 7.1);
     },
     letter: function (t, at, el) { // письмо из истории посёлка раскрывается в лист с фото памятника
       var lt = el.querySelector(".letter"), q = pt(lt, 0.5, 0.48);
