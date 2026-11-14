@@ -269,7 +269,7 @@
       plane.quaternion.copy(camera.quaternion);
       plane.rotateX(Math.PI / 2 * P.face);
       if (P.face < 1) { // плавный выход в полёт
-        tmp.copy(pos).sub(IDLE);
+        tmp.copy(pos).sub(head);
         var q = plane.quaternion.clone(); plane.lookAt(tmp); plane.quaternion.slerp(q, P.face);
       }
       lastX = P.x; return;
