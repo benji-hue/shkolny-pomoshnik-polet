@@ -92,6 +92,99 @@
   function showMsg(fig) { return function (t, at) { t.fromTo(fig.querySelector(".msg"), { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, at); }; }
   function screen(fig) { return pt(fig, 0.5, 0.45); }
 
+  /* ---------- сквозной телефон главы: переезжает между слайдами, экран меняется ---------- */
+  var phA = document.getElementById("phoneA"), phB = document.getElementById("phoneB"), loupe = document.getElementById("loupe");
+  var DIM = "brightness(0.07) saturate(0.4)";
+  function poseOf(el, key) { var v = el.dataset[key]; if (!v) return null; var a = v.split(",").map(Number); return { x: a[0], y: a[1], w: a[2], r: a[3] }; }
+  function srcOf(el, cls) { var im = el.querySelector("img." + cls); return im ? im.src : null; }
+  function screenOf(pose) { return { x: pose.x + pose.w / 2, y: pose.y + (pose.w * 2.164 + 22) * 0.45, d: 11, s: 0.55 }; }
+  function phoneTo(t, at, fig, pose, src, dim, dur) {
+    var s1 = fig.querySelector(".scr"), s2 = fig.querySelector(".scr2");
+    if (!pose) { t.to(fig, { opacity: 0, y: 40, duration: 0.45, ease: "power2.in" }, at); return; }
+    var shown = parseFloat(G.getProperty(fig, "opacity")) > 0.05;
+    if (!shown) { // появляется на месте
+      t.set(s1, { attr: { src: src }, filter: dim ? DIM : "none" }, at);
+      t.set(s2, { opacity: 0 }, at);
+      t.set(fig, { left: pose.x, top: pose.y, width: pose.w, rotation: pose.r, x: 0, y: 70, opacity: 0 }, at);
+      t.to(fig, { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" }, at + 0.05);
+      return;
+    }
+    t.to(fig, { left: pose.x, top: pose.y, width: pose.w, rotation: pose.r, x: 0, y: 0, opacity: 1, duration: dur, ease: "power3.inOut" }, at);
+    if (s1.getAttribute("src") === src) { t.to(s1, { filter: dim ? DIM : "none", duration: 0.5 }, at); return; }
+    var mid = at + dur * 0.35;
+    t.set(s2, { attr: { src: src }, opacity: 0, filter: dim ? DIM : "none" }, at);
+    t.to(s2, { opacity: 1, duration: 0.5, ease: "power1.inOut" }, mid);
+    t.set(s1, { attr: { src: src }, filter: dim ? DIM : "none" }, mid + 0.55);
+    t.set(s2, { opacity: 0 }, mid + 0.56);
+  }
+  function setPhone(fig, pose, src, dim) {
+    if (!pose) { G.set(fig, { opacity: 0 }); return; }
+    var s1 = fig.querySelector(".scr"); s1.src = src;
+    G.set(s1, { filter: dim ? DIM : "none" }); G.set(fig.querySelector(".scr2"), { opacity: 0 });
+    G.set(fig, { left: pose.x, top: pose.y, width: pose.w, rotation: pose.r, x: 0, y: 0, opacity: 1 });
+  }
+  function phonesFor(t, at, el, dur) {
+    phoneTo(t, at, phA, poseOf(el, "pose"), srcOf(el, "phone-src"), el.dataset.mail === "dim", dur);
+    phoneTo(t, at + 0.08, phB, poseOf(el, "pose2"), srcOf(el, "phone-src2"), false, dur);
+  }
+  function lightPP() { return function (t, at) { t.to(phA.querySelectorAll("img"), { filter: "brightness(1) saturate(1)", duration: 0.6, ease: "power2.out" }, at); }; }
+  function then(a, b) { return function (t, at) { a(t, at); b(t, at); }; }
+
+  /* видоискатель на нужной строке скриншота и лупа с этой строкой крупно */
+  function natural(img) {
+    if (img && img.naturalWidth) return [img.naturalWidth, img.naturalHeight];
+    return /bot-(study|books|admissions)/.test(img && img.getAttribute("src") || "") ? [588, 1280] : [780, 1688];
+  }
+  function focusShot(el, fig, img, figW) {
+    return function (t, at) {
+      var f = el.dataset.focus, L = el.dataset.loupe; if (!f || !L || !img) return;
+      var r = f.split(",").map(Number), l = L.split(",").map(Number);
+      var vf = fig.querySelector(".vf");
+      if (!vf) { vf = document.createElement("span"); vf.className = "vf"; vf.innerHTML = "<i></i><i></i><i></i><i></i>"; fig.appendChild(vf); }
+      var nn = natural(img), nw = nn[0], nh = nn[1], iw = (figW || fig.offsetWidth) - 22, ih = iw * nh / nw;
+      var k = l[2] / ((r[2] - r[0]) * nw);
+      t.set(vf, { left: 11 + r[0] * iw, top: 11 + r[1] * ih, width: (r[2] - r[0]) * iw, height: (r[3] - r[1]) * ih }, at);
+      t.set(loupe, { left: l[0], top: l[1], width: l[2], height: (r[3] - r[1]) * nh * k,
+        backgroundImage: "url(" + img.src + ")", backgroundSize: (nw * k) + "px auto", backgroundPosition: (-r[0] * nw * k) + "px " + (-r[1] * nh * k) + "px" }, at);
+      t.fromTo(vf, { opacity: 0, scale: 1.3 }, { opacity: 1, scale: 1, duration: 0.45, ease: "power3.out", immediateRender: false }, at + 0.02);
+      t.fromTo(loupe, { opacity: 0, scale: 0.55 }, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)", immediateRender: false }, at + 0.35);
+    };
+  }
+  function hideFocus(t, at) { t.to([loupe].concat(Array.prototype.slice.call(document.querySelectorAll(".vf"))), { opacity: 0, duration: 0.3 }, at); }
+
+  /* карта маршрута на титулах глав: самолётик долетает до текущей главы */
+  var CHAPTERS = ["Идея", "Как работает", "Учебный день", "Моя родина", "Проверка"];
+  var SVGNS = "http://www.w3.org/2000/svg";
+  function svgEl(name, attrs, parent) { var e = document.createElementNS(SVGNS, name); for (var k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; }
+  function buildRoute(box) {
+    var cur = +box.dataset.chi, svg = svgEl("svg", { viewBox: "0 0 1680 120", preserveAspectRatio: "none" }, box);
+    var d = "M 30 78 Q 840 -14 1650 78";
+    svgEl("path", { d: d, "class": "rm-line" }, svg);
+    var done = svgEl("path", { d: d, "class": "rm-done" }, svg);
+    var len = done.getTotalLength(), fr = [0.03, 0.27, 0.5, 0.73, 0.97];
+    CHAPTERS.forEach(function (name, i) {
+      var p = done.getPointAtLength(len * fr[i]);
+      svgEl("circle", { cx: p.x, cy: p.y, r: i === cur ? 11 : 8, "class": "rm-dot" + (i < cur ? " is-done" : i === cur ? " is-cur" : "") }, svg);
+      var tx = svgEl("text", { x: p.x, y: p.y + 44, "text-anchor": i === 0 ? "start" : i === 4 ? "end" : "middle", "class": "rm-label" + (i === cur ? " is-cur" : "") }, svg);
+      tx.textContent = name;
+    });
+    var pl = svgEl("g", { "class": "rm-plane" }, svg);
+    svgEl("path", { d: "M -16 -9 L 18 0 L -16 9 L -9 0 Z" }, pl);
+    box._route = { done: done, len: len, from: fr[Math.max(0, cur - 1)], to: fr[cur], plane: pl };
+  }
+  function routeAnim(t, at, box) {
+    var R = box._route; if (!R) return;
+    var o = { f: R.from };
+    function draw() {
+      R.done.setAttribute("stroke-dasharray", R.len); R.done.setAttribute("stroke-dashoffset", R.len * (1 - o.f));
+      var p = R.done.getPointAtLength(R.len * o.f), q = R.done.getPointAtLength(Math.min(R.len, R.len * o.f + 2));
+      R.plane.setAttribute("transform", "translate(" + p.x + "," + (p.y - 1) + ") rotate(" + (Math.atan2(q.y - p.y, q.x - p.x) * 180 / Math.PI) + ")");
+    }
+    t.add(function () { o.f = R.from; draw(); }, 0);
+    t.to(o, { f: R.to, duration: 1.8, ease: "power2.inOut", onUpdate: draw }, at);
+  }
+  slides.forEach(function (el) { var b = el.querySelector(".route-map"); if (b) buildRoute(b); });
+
   var MAIL = {
     goal: function (t, at) { // правило показа: вот так выглядит сообщение
       var p = POSES.goal;
@@ -122,28 +215,28 @@
       e = refold(t, e + 0.35, w4.x, w4.y, 0.5);
       tag(t, e, "одобрено → ученику");
       e = fly(t, e, [w4, { x: (w4.x + ps.x) / 2, y: Math.min(w4.y, ps.y) - 110, d: 11, s: 0.5 }, ps], 1.4);
-      touchdown(t, e, ps.x, ps.y, showMsg(ph));
+      touchdown(t, e, ps.x, ps.y, then(showMsg(ph), function (tt, a2) { focusShot(el, ph, ph.querySelector('.msg'))(tt, a2 + 0.7); }));
     },
     day: function (t, at, el) { // в 07:30 расписание прилетает на телефон
-      var ph = el.querySelector(".phone"), clk = el.querySelector(".clock-t"), ps = screen(ph), o = { m: 0 };
+      var pose = poseOf(el, "pose"), clk = el.querySelector(".clock-t"), ps = screenOf(pose), o = { m: 0 };
       var a = at + 0.6;
       arrive(t, a, { x: 960, y: 420, d: 30, s: 0.55 });
       tag(t, a + 0.5, "расписание → ученику");
       var e = fly(t, a, [{ x: 960, y: 420, d: 30, s: 0.55 }, { x: 780, y: 330, d: 12, s: 0.55 }, { x: 1160, y: 210, d: 11, s: 0.55 }, ps], 2.6);
       t.fromTo(o, { m: 0 }, { m: 30, duration: 2.6, ease: "none", onUpdate: function () { clk.textContent = "07:" + String(Math.round(o.m)).padStart(2, "0"); } }, a);
-      touchdown(t, e, ps.x, ps.y, lightPhone(ph));
+      touchdown(t, e, ps.x, ps.y, then(lightPP(), function (tt, a2) { focusShot(el, phA, el.querySelector('img.phone-src'), pose.w)(tt, a2 + 0.75); }));
     },
     teacher: function (t, at, el) { // учитель отправил отметку — она у ученика
-      var fl = el.querySelectorAll(".flow")[1], ph = el.querySelector(".phone");
-      var s0 = pt(fl, 0.9, 0.5), ps = screen(ph);
+      var fl = el.querySelectorAll(".flow")[1], pose = poseOf(el, "pose");
+      var s0 = pt(fl, 0.06, 0.5), ps = screenOf(pose);
       var e = refold(t, at + 1.0, s0.x, s0.y, 0.5);
       tag(t, e, "отметка → ученику");
       e = fly(t, e, [s0, { x: (s0.x + ps.x) / 2, y: Math.min(s0.y, ps.y) - 150, d: 11, s: 0.55 }, ps], 1.6);
-      touchdown(t, e, ps.x, ps.y, lightPhone(ph));
+      touchdown(t, e, ps.x, ps.y, then(lightPP(), function (tt, a2) { focusShot(el, phA, el.querySelector('img.phone-src'), pose.w)(tt, a2 + 0.75); }));
     },
     study: function (t, at, el) { // вопрос улетает в облако, бот ищет по учебникам, ответ возвращается
-      var chip = el.querySelector(".chips li"), ph = el.querySelector(".phone"), big = el.querySelector("[data-mail-count]");
-      var s0 = pt(chip), ps = screen(ph), o = { v: 0 };
+      var chip = el.querySelector(".chips li"), pose = poseOf(el, "pose"), big = el.querySelector("[data-mail-count]");
+      var s0 = pt(chip), ps = screenOf(pose), o = { v: 0 };
       var e = refold(t, at + 1.0, s0.x, s0.y, 0.5);
       tag(t, e, "вопрос → в облако");
       e = fly(t, e, [s0, { x: 860, y: 300, d: 14, s: 0.5 }, { x: 960, y: 150, d: 34, s: 0.5 }], 1.3, "power1.in");
@@ -154,7 +247,7 @@
       t.to(P, { show: 1, duration: 0.3 }, back);
       tag(t, back + 0.5, "ответ + страница учебника → ученику");
       e = fly(t, back, [{ x: 1160, y: 130, d: 34, s: 0.55 }, { x: 1290, y: 210, d: 12, s: 0.55 }, ps], 1.7, "power1.out");
-      touchdown(t, e, ps.x, ps.y, lightPhone(ph));
+      touchdown(t, e, ps.x, ps.y, then(lightPP(), function (tt, a2) { focusShot(el, phA, el.querySelector('img.phone-src'), pose.w)(tt, a2 + 0.75); }));
     },
     next: function (t, at) { // следующий маршрут проекта
       var a = at + 0.8;
@@ -163,6 +256,27 @@
       fly(t, a, [{ x: 1720, y: 430, d: 11, s: 0.6 }, { x: 1520, y: 340, d: 14, s: 0.6 }, { x: 1260, y: 300, d: 26, s: 0.6 }, { x: 1110, y: 290, d: 50, s: 0.6 }], 6.0, "sine.in");
       tag(t, a + 4.6, null);
       t.to(P, { show: 0, duration: 0.8 }, a + 5.2);
+    },
+    hero: function (t, at) { // огромный самолётик пролетает перед заголовком главы
+      arrive(t, at + 0.2, { x: -460, y: 720, d: 9, s: 3.1 });
+      fly(t, at + 0.2, [{ x: -460, y: 720, d: 9, s: 3.1 }, { x: 520, y: 600, d: 9, s: 3.1 }, { x: 1320, y: 470, d: 9, s: 3.0 }, { x: 2500, y: 330, d: 10, s: 2.8 }], 7.5, "sine.inOut");
+      t.to(P, { show: 0, duration: 0.2 }, at + 7.6);
+    },
+    letter: function (t, at, el) { // письмо из истории посёлка раскрывается в лист с фото памятника
+      var lt = el.querySelector(".letter"), q = pt(lt, 0.5, 0.48);
+      arrive(t, at + 0.9, { x: 960, y: 300, d: 30, s: 0.6 });
+      tag(t, at + 1.3, "история Мухавца → ученику");
+      var e = fly(t, at + 0.9, [{ x: 960, y: 300, d: 30, s: 0.6 }, { x: 1180, y: 420, d: 13, s: 0.85 }, { x: q.x, y: q.y, d: 8, s: 1.35 }], 2.2);
+      touchdown(t, e, q.x, q.y, function (tt, a2) { tt.fromTo(lt, { opacity: 0, scale: 0.28, rotation: -18 }, { opacity: 1, scale: 1, rotation: -6, duration: 0.9, ease: "power3.out" }, a2); });
+    },
+    digits: function (t, at, el) { // самолётик пролетает сквозь контурные цифры «15»
+      var a = pt(el.querySelector(".d1"), 0.35, 0.62), b = pt(el.querySelector(".d2"), 0.7, 0.42);
+      t.add(function () { W.setLayer("back"); }, at + 0.8);
+      t.set(P, { face: 0, fold: 1, trail: 1, idle: 0, x: a.x - 560, y: a.y + 230, d: 12, s: 1.25 }, at + 0.8);
+      t.to(P, { show: 1, duration: 0.3 }, at + 0.8);
+      var e = fly(t, at + 0.8, [{ x: a.x - 560, y: a.y + 230, d: 12, s: 1.25 }, { x: a.x, y: a.y, d: 11, s: 1.25 }, { x: b.x, y: b.y, d: 11, s: 1.2 }, { x: b.x + 520, y: b.y - 260, d: 14, s: 1.1 }], 3.4);
+      t.to(P, { show: 0, duration: 0.3 }, e - 0.2);
+      t.add(function () { W.setLayer("front"); }, e + 0.15);
     },
     final: function (t, at, el) { // последнее сообщение — жюри: раскрывается в QR-код
       var qr = el.querySelector(".qr"), q = pt(qr, 0.5, 0.55);
@@ -174,6 +288,7 @@
     }
   };
   function showMail(el) { // без WebGL: всё доставлено сразу
+    G.set(phA.querySelectorAll("img"), { filter: "none" });
     G.set(el.querySelectorAll("[data-deliver], .phone .msg"), { opacity: 1 });
     el.querySelectorAll('.phone[data-mail="dim"] img').forEach(function (im) { G.set(im, { filter: "none" }); });
     var clk = el.querySelector(".clock-t"); if (clk) clk.textContent = "07:30";
@@ -227,6 +342,7 @@
     el.querySelectorAll("svg.arch-lines, svg.route-line").forEach(function (svg) {
       t.fromTo(svg, { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 1.6, ease: "power2.inOut" }, 0.5);
     });
+    var rb = el.querySelector(".route-map"); if (rb) routeAnim(t, 0.7, rb);
     el.querySelectorAll("[data-count]:not([data-mail-count])").forEach(function (c) {
       var o = { v: 0 }, to = parseFloat(c.dataset.count), pre = c.dataset.prefix || "", suf = c.dataset.suffix || "";
       t.to(o, { v: to, duration: 1.8, ease: "power2.out", onUpdate: function () { c.textContent = pre + fmt(o.v) + suf; } }, 0.35);
@@ -308,28 +424,36 @@
       if (hasWorld) G.set(W.state, { z: camZ(n), y: camY(n), tod: tod(n) });
       G.set(mist, { opacity: el.dataset.enter === "cloud" ? 0.62 : 0 });
       G.set(land, { opacity: isLand(n) ? 1 : 0 });
+      setPhone(phA, poseOf(el, "pose"), srcOf(el, "phone-src"), el.dataset.mail === "dim");
+      setPhone(phB, poseOf(el, "pose2"), srcOf(el, "phone-src2"), false);
+      G.set(loupe, { opacity: 0 });
       enterTl = reveal(el); tl = G.timeline(); planeEnter(tl, n, 0.2);
       return;
     }
     var old = slides[from];
+    var glide = !!old.dataset.ch && old.dataset.ch === el.dataset.ch && !(dir > 0 && old.dataset.leave === "fold");
+    var T = glide ? { out: 0.6, cam: 1.5, vis: 0.45, inn: 0.5, rev: 0.6, plane: 0.7, ph: 0.1, phDur: 1.3, sc: 1.4 }
+                  : { out: 0.85, cam: 2.0, vis: 1.05, inn: 1.1, rev: 1.15, plane: 1.25, ph: 0.95, phDur: 0.9, sc: 1.4 };
     busy = true;
     tl = G.timeline({ onComplete: function () { busy = false; G.set(old, { visibility: "hidden" }); } });
     var start = 0;
+    hideFocus(tl, 0);
     if (dir > 0 && old.dataset.leave === "fold") start = foldOut(tl, old);
     else planeLeave(tl, 0);
     var landToLand = isLand(from) && isLand(n);
-    tl.to(old, { scale: dir > 0 ? 1.18 : 0.86, opacity: 0, duration: 0.85, ease: "power2.in" }, start);
+    tl.to(old, { scale: dir > 0 ? (glide ? 1.05 : 1.18) : (glide ? 0.95 : 0.86), opacity: 0, duration: T.out, ease: "power2.in" }, start);
     if (hasWorld) {
       var fc = W.frontClouds.material.uniforms.uOpacity;
-      tl.set(fc, { value: landToLand ? 0 : 1 }, start);
-      tl.to(W.state, { z: camZ(n), y: camY(n), tod: tod(n), duration: 2.0, ease: "power2.inOut" }, start + 0.05);
+      tl.set(fc, { value: (landToLand || glide) ? 0 : 1 }, start);
+      tl.to(W.state, { z: camZ(n), y: camY(n), tod: tod(n), duration: T.cam, ease: "power2.inOut" }, start + 0.05);
     }
     scenery(tl, n, start + 0.25, 1.4);
     if (landToLand) tl.to(land.querySelector("img"), { scale: "+=0.04", duration: 2, ease: "power2.inOut" }, start);
-    tl.set(el, { visibility: "visible" }, start + 1.05);
-    tl.fromTo(el, { opacity: 0, scale: dir > 0 ? 0.86 : 1.16 }, { opacity: 1, scale: 1, duration: 1.0, ease: "power2.out" }, start + 1.1);
-    tl.add(function () { enterTl = reveal(el); }, start + 1.15);
-    planeEnter(tl, n, start + 1.25);
+    phonesFor(tl, start + (poseOf(el, "pose") ? T.ph : 0.1), el, T.phDur);
+    tl.set(el, { visibility: "visible" }, start + T.vis);
+    tl.fromTo(el, { opacity: 0, scale: dir > 0 ? (glide ? 0.96 : 0.86) : (glide ? 1.04 : 1.16) }, { opacity: 1, scale: 1, duration: glide ? 0.8 : 1.0, ease: "power2.out" }, start + T.inn);
+    tl.add(function () { enterTl = reveal(el); }, start + T.rev);
+    planeEnter(tl, n, start + T.plane);
   }
 
   /* ---------- открытие: влёт сквозь облака ---------- */

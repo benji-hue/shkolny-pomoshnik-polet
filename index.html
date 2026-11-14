@@ -17,7 +17,7 @@
 <main id="stage" aria-live="polite">
 
 <!-- 01 · Обложка -->
-<section class="slide s-cover" data-tod="0" data-tone="dark" data-plane="cover">
+<section class="slide s-cover" data-ch="intro" data-tod="0" data-tone="dark" data-plane="cover">
   <p class="kicker" data-r="up">Исследовательская работа · 2026</p>
   <h1 class="title" data-r="title">
     <span class="tw"><span>Школьный</span></span>
@@ -32,7 +32,7 @@
 </section>
 
 <!-- 02 · Проблема -->
-<section class="slide s-problem" data-tod="0.07" data-tone="dark" data-plane="hide" data-leave="fold">
+<section class="slide s-problem" data-ch="intro" data-tod="0.07" data-tone="dark" data-plane="hide" data-leave="fold">
   <p class="kicker" data-r="up">Введение · проблема</p>
   <h2 class="h" data-r="mask"><span class="tw"><span>Всё нужное —</span></span> <span class="tw"><span>в&nbsp;разных местах</span></span></h2>
   <div class="sheets">
@@ -46,7 +46,7 @@
 </section>
 
 <!-- 03 · Цель и гипотеза -->
-<section class="slide s-goal" data-tod="0.15" data-tone="light" data-plane="goal">
+<section class="slide s-goal" data-ch="intro" data-tod="0.15" data-tone="light" data-plane="goal">
   <p class="kicker" data-r="up">Введение · цель и гипотеза</p>
   <h2 class="h" data-r="mask"><span class="tw"><span>Собрать всё</span></span> <span class="tw"><span>в&nbsp;одном помощнике</span></span></h2>
   <p class="lead goal-text" data-r="up"><b>Цель</b> — разработать и&nbsp;исследовать Telegram-бота «Школьный помощник» как&nbsp;средство информационной поддержки, организации учебной работы и&nbsp;доступа к&nbsp;краеведческим материалам.</p>
@@ -64,7 +64,7 @@
 </section>
 
 <!-- 04 · Глава 1 -->
-<section class="slide s-theory" data-tod="0.22" data-tone="light" data-plane="hide">
+<section class="slide s-theory" data-ch="intro" data-tod="0.22" data-tone="light" data-plane="hide">
   <p class="kicker" data-r="up">Глава 1 · на что опираемся</p>
   <h2 class="h" data-r="mask"><span class="tw"><span>Помощник,</span></span> <span class="tw"><span>а&nbsp;не замена учителю</span></span></h2>
   <ol class="principles">
@@ -76,8 +76,16 @@
   <aside class="notes">Мы опирались на обзоры ЮНЕСКО. Три вывода. Первое: доступная информация экономит силы на поиск, но внимание зависит от условий — эффект нужно проверять. Второе: уведомления полезны только вовремя, поэтому их можно настроить и отключить. Третье: ответ нейросети нужно проверять, а за задания и отметки отвечает учитель.</aside>
 </section>
 
+<!-- Глава · Как работает -->
+<section class="slide s-div s-div-arch" data-ch="arch" data-tod="0.25" data-tone="light" data-plane="hero" data-chi="1">
+  <p class="kicker" data-r="up">Глава 2 · разработка</p>
+  <h2 class="dt" data-r="title"><span class="tw"><span>Как работает</span></span><span class="tw"><span>бот</span></span></h2>
+  <div class="route-map" data-chi="1"></div>
+  <aside class="notes">Дальше — как устроен бот изнутри и как в него попадает новый пользователь.</aside>
+</section>
+
 <!-- 05 · Архитектура -->
-<section class="slide s-arch" data-tod="0.3" data-tone="light" data-plane="arch" data-enter="cloud">
+<section class="slide s-arch" data-ch="arch" data-tod="0.3" data-tone="light" data-plane="arch" data-enter="cloud">
   <p class="kicker" data-r="up">2.1 · устройство</p>
   <h2 class="h" data-r="mask"><span class="tw"><span>Бот живёт в&nbsp;облаке</span></span></h2>
   <div class="arch">
@@ -100,7 +108,7 @@
 </section>
 
 <!-- 06 · Вход и роли -->
-<section class="slide s-roles" data-tod="0.33" data-tone="light" data-plane="route">
+<section class="slide s-roles" data-ch="arch" data-tod="0.33" data-tone="light" data-plane="route" data-focus="0.03,0.795,0.9,0.866" data-loupe="1290,722,600">
   <p class="kicker" data-r="up">2.5 · регистрация и роли</p>
   <h2 class="h" data-r="mask"><span class="tw"><span>Путь нового пользователя</span></span></h2>
   <div class="route">
@@ -121,8 +129,17 @@
   <aside class="notes">При первом входе пользователь выбирает русский или белорусский язык и способ доступа. «Попробовать без регистрации» открывает гостевой режим: можно посмотреть расписание, учебные разделы и музей. Чтобы стать учеником, нужно подать заявку: имя, фамилия, класс. Администратор её одобряет — и открывается доступ по роли. Ученик видит свои отметки, учитель работает с заданиями и отметками, администратор — с заявками и учителями. Заявка летит к администратору, он одобряет — и ответ прилетает ученику в чат.</aside>
 </section>
 
+<!-- Глава · Учебный день -->
+<section class="slide s-div s-div-day" data-ch="day" data-tod="0.34" data-tone="light" data-plane="hide" data-chi="2" data-pose="1080,120,620,-12">
+  <p class="kicker" data-r="up">Глава 2 · функции</p>
+  <h2 class="dt" data-r="title"><span class="tw"><span>Один</span></span><span class="tw"><span>учебный день</span></span></h2>
+  <img class="phone-src" hidden src="img/shots/menu.webp" alt="">
+  <div class="route-map" data-chi="2"></div>
+  <aside class="notes">Пройдём один учебный день ученика: утро, уроки, учёба, подготовка к экзаменам и вечер дома. Всё — в одном чате.</aside>
+</section>
+
 <!-- 07 · Учебный день -->
-<section class="slide s-day" data-tod="0.37" data-tone="light" data-plane="day">
+<section class="slide s-day" data-ch="day" data-tod="0.37" data-tone="light" data-plane="day" data-mail="dim" data-pose="1420,96,360,3" data-focus="0.02,0.455,0.83,0.676" data-loupe="1250,560,600">
   <p class="kicker" data-r="up">2.6 · расписание</p>
   <h2 class="h" data-r="mask"><span class="tw"><span>Утро начинается</span></span> <span class="tw"><span>с&nbsp;расписания</span></span></h2>
   <div class="clock" data-r="up"><span class="clock-t" data-count-time="07:30">07:30</span><span class="clock-c">по&nbsp;Минску — утренняя рассылка, время можно изменить</span></div>
@@ -132,12 +149,12 @@
     <li data-r="up">На&nbsp;каникулах обычные уведомления о&nbsp;занятиях на&nbsp;паузе</li>
     <li data-r="up">Данные — из&nbsp;школьных документов; при&nbsp;изменениях их&nbsp;обновляют</li>
   </ul>
-  <figure class="phone ph-day" data-r="img" data-mail="dim"><img src="img/shots/day-1.webp" alt="Утреннее сообщение с расписанием в боте"></figure>
+  <img class="phone-src" hidden src="img/shots/day-1.webp" alt="">
   <aside class="notes">Ученик открывает расписание своего класса на сегодня, завтра или неделю, а также звонки и домашние задания. После одобрения заявки каждое утро в 07:30 по минскому времени приходит расписание — время можно изменить. На каникулах обычные уведомления останавливаются. Расписание основано на школьных документах, поэтому при изменениях его нужно обновлять. Ровно в 07:30 сообщение с расписанием прилетает на телефон.</aside>
 </section>
 
 <!-- 08 · Учитель -->
-<section class="slide s-teacher" data-tod="0.45" data-tone="light" data-plane="teacher">
+<section class="slide s-teacher" data-ch="day" data-tod="0.45" data-tone="light" data-plane="teacher" data-mail="dim" data-pose="150,110,360,-3" data-focus="0.02,0.645,0.68,0.755" data-loupe="70,600,560">
   <p class="kicker" data-r="up">2.6 · учительская</p>
   <h2 class="h" data-r="mask"><span class="tw"><span>Учитель ставит —</span></span> <span class="tw"><span>ученик сразу узнаёт</span></span></h2>
   <div class="flows">
@@ -145,13 +162,13 @@
     <div class="flow" data-r="up"><span class="mono-k">Отметка</span><p>ученик → предмет → значение, дата, комментарий</p><em>ученику — личное сообщение</em></div>
     <div class="flow" data-r="up"><span class="mono-k">Сводка дня</span><p>через час после последнего урока класса</p><em>отметки за&nbsp;день или «записей пока нет»</em></div>
   </div>
-  <figure class="phone ph-teacher" data-r="img" data-mail="dim"><img src="img/shots/day-2.webp" alt="Сообщения бота об отметке и домашнем задании"></figure>
+  <img class="phone-src" hidden src="img/shots/day-2.webp" alt="">
   <p class="note" data-r="up">Бот не&nbsp;узнаёт оценки сам: в&nbsp;журнал попадает только то, что&nbsp;внёс учитель.</p>
   <aside class="notes">У учителя своя панель. Домашнее задание: выбрать класс и предмет, ввести текст и дату, подтвердить — класс получает уведомление. Отметка: выбрать ученика, предмет, значение, дату и комментарий — ученику приходит личное сообщение. Через час после последнего урока бот присылает сводку за день. Важно: бот не узнаёт оценки сам, в журнал попадает только то, что внёс учитель. Учитель отправил отметку — и она сразу прилетает ученику.</aside>
 </section>
 
 <!-- 09 · Учёба -->
-<section class="slide s-study" data-tod="0.5" data-tone="light" data-plane="study">
+<section class="slide s-study" data-ch="day" data-tod="0.5" data-tone="light" data-plane="study" data-mail="dim" data-pose="1430,96,350,3" data-focus="0.03,0.585,0.9,0.645" data-loupe="1250,712,620">
   <p class="kicker" data-r="up">2.7 · учебные материалы</p>
   <h2 class="h" data-r="mask"><span class="tw"><span>Объяснит, разберёт,</span></span> <span class="tw"><span>покажет источник</span></span></h2>
   <div class="bigcount" data-r="up"><span class="big" data-count="25622" data-mail-count>25&nbsp;622</span><span class="big-c">страницы в&nbsp;библиотеке бота · 114 учебников · 25&nbsp;552 доступны для&nbsp;поиска</span><span class="date">на&nbsp;13.11.2026</span></div>
@@ -159,13 +176,13 @@
     <li>Объяснить тему</li><li>Разобрать задачу</li><li>Тренировка</li><li>Формулы</li><li class="hl">Проще</li><li class="hl">Пример</li><li>Источник</li><li>Перевод RU → BE</li>
   </ul>
   <p class="body study-m" data-r="up">Поиск учитывает выбранный класс. Ответы — GPT-6.1 Sol, белорусский — Gemma, резерв — Qwen.</p>
-  <figure class="phone ph-study" data-r="img" data-mail="dim"><img src="img/shots/bot-study.webp" alt="Ответ бота на белорусском языке с источником из учебника"></figure>
+  <img class="phone-src" hidden src="img/shots/bot-study.webp" alt="">
   <p class="note" data-r="up">Ссылка на&nbsp;учебник помогает проверить ответ, но&nbsp;не&nbsp;заменяет чтение страницы.</p>
   <aside class="notes">В учебном разделе можно попросить объяснить тему, разобрать задачу, получить тренировочное упражнение или открыть формулы. Если непонятно — кнопки «Проще» и «Пример», и можно задавать уточнения по той же теме. В библиотеке бота 114 учебников и 25 622 страницы, поиск учитывает класс. В отдельных ответах бот показывает источник из учебника — на экране пример на белорусском. Источник помогает проверить ответ, но не заменяет чтение страницы. Вопрос улетает в облако, бот ищет по страницам учебников и возвращает ответ с источником.</aside>
 </section>
 
 <!-- 10 · Крок и поступление -->
-<section class="slide s-krok" data-tod="0.56" data-tone="light" data-plane="hide">
+<section class="slide s-krok" data-ch="day" data-tod="0.56" data-tone="light" data-plane="hide" data-pose="1240,170,300,-5" data-pose2="1565,235,285,5">
   <p class="kicker" data-r="up">2.4 · подготовка и поступление</p>
   <h2 class="h" data-r="mask"><span class="tw"><span>К&nbsp;ЦЭ и&nbsp;ЦТ —</span></span> <span class="tw"><span>и&nbsp;дальше, в&nbsp;вуз</span></span></h2>
   <div class="duo">
@@ -180,13 +197,37 @@
       <p class="small">Проходные баллы прошлых лет помогают ориентироваться, но&nbsp;не&nbsp;гарантируют поступление.</p>
     </div>
   </div>
-  <figure class="phone ph-k1" data-r="img"><img src="img/shots/krok-today.webp" alt="План на сегодня в «Кроке»"></figure>
-  <figure class="phone ph-k2" data-r="img"><img src="img/shots/bot-admissions.webp" alt="Раздел «Куда поступать» в боте"></figure>
+  <img class="phone-src" hidden src="img/shots/krok-today.webp" alt="">
+  <img class="phone-src2" hidden src="img/shots/bot-admissions.webp" alt="">
   <aside class="notes">Из учебного раздела можно перейти в «Крок» — отдельный ресурс для подготовки к ЦЭ и ЦТ: план занятий, повторение, тренировки и пробные варианты, репетитор для разбора ошибок и прогноз баллов. Основная модель «Крока» — Gemini, резервная — Qwen. В самом боте есть раздел «Куда поступать»: поиск по предметам, баллам, вузу или городу по данным «Адукар». Проходные баллы прошлых лет — ориентир, а не гарантия.</aside>
 </section>
 
+<!-- 13 · Дома -->
+<section class="slide s-games" data-ch="day" data-tod="0.6" data-tone="light" data-plane="hide" data-pose="1250,140,320,-4" data-pose2="1510,200,300,4">
+  <p class="kicker" data-r="up">2.3 · дома, после уроков</p>
+  <h2 class="h" data-r="mask"><span class="tw"><span>Вечером — шахматы,</span></span> <span class="tw"><span>игры и&nbsp;план</span></span></h2>
+  <div class="games">
+    <div data-r="up"><span class="mono-k">ChessBel · отдельное приложение [8]</span><p>Игра с&nbsp;компьютером, онлайн или&nbsp;вдвоём, задачи, книга дебютов, рейтинг и&nbsp;турниры. На&nbsp;высоких уровнях — движок Stockfish, на&nbsp;начальных — учебный алгоритм.</p></div>
+    <div data-r="up"><span class="mono-k">В боте</span><p>Ребусы, викторина и&nbsp;«Кодовый замок» — чтобы переключиться и&nbsp;потренировать логику.</p></div>
+    <div data-r="up"><span class="mono-k">Планировщик</span><p>Список дел и&nbsp;учебный таймер: выделить время на&nbsp;одну задачу.</p></div>
+  </div>
+  <img class="phone-src" hidden src="img/shots/chess-home.webp" alt="">
+  <img class="phone-src2" hidden src="img/shots/chess-opening.webp" alt="">
+  <p class="note" data-r="up">Игровые очки — не&nbsp;школьные отметки; таймер не&nbsp;измеряет внимание.</p>
+  <aside class="notes">Вечером, дома, можно открыть ChessBel — наше шахматное приложение: игра с компьютером, онлайн или вдвоём, задачи, книга дебютов, рейтинг и турниры. На высоких уровнях работает движок Stockfish, на начальных — учебный алгоритм. В самом боте есть ребусы, викторина и «Кодовый замок», а для самостоятельной работы — список дел и учебный таймер. Игровые очки — не школьные отметки.</aside>
+</section>
+
+<!-- Глава · Моя родина -->
+<section class="slide s-div s-div-home" data-ch="home" data-tod="0.65" data-tone="dark" data-plane="letter" data-scene="land" data-chi="3">
+  <p class="kicker" data-r="up">Глава 2 · краеведение</p>
+  <h2 class="dt" data-r="title"><span class="tw"><span>Моя</span></span><span class="tw"><span>родина</span></span></h2>
+  <figure class="letter" data-deliver><img src="img/photo/memorial.webp" alt="Памятник землякам в Мухавце"><figcaption>Мухавец · памятник землякам · 1976</figcaption></figure>
+  <div class="route-map" data-chi="3"></div>
+  <aside class="notes">Отдельная часть проекта — история нашего посёлка: школьный музей и памятные места.</aside>
+</section>
+
 <!-- 11 · Моя родина -->
-<section class="slide s-home" data-tod="0.66" data-tone="dark" data-plane="hide" data-scene="land">
+<section class="slide s-home" data-ch="home" data-tod="0.66" data-tone="dark" data-plane="hide" data-scene="land">
   <p class="kicker" data-r="up">2.2 · краеведение</p>
   <h2 class="h" data-r="mask"><span class="tw"><span>Моя родина</span></span></h2>
   <p class="lead home-lead" data-r="up">Раздел ведёт на&nbsp;страницу школьного музея и&nbsp;памятных мест Мухавца: виртуальные прогулки и&nbsp;видеорассказы&nbsp;[7].</p>
@@ -199,7 +240,7 @@
 </section>
 
 <!-- 12 · Экскурсовод -->
-<section class="slide s-guide" data-tod="0.7" data-tone="dark" data-plane="hide" data-scene="land">
+<section class="slide s-guide" data-ch="home" data-tod="0.7" data-tone="dark" data-plane="hide" data-scene="land">
   <p class="kicker" data-r="up">2.2 · виртуальный музей</p>
   <h2 class="h" data-r="mask"><span class="tw"><span>Прогулка и&nbsp;экскурсовод</span></span></h2>
   <figure class="shot-wide" data-r="img"><img src="img/photo/walk-museum.webp" alt="Виртуальная прогулка по школьному музею"></figure>
@@ -212,23 +253,18 @@
   <aside class="notes">В виртуальном музее можно осматриваться, подходить к экспозициям и открывать видеорассказы. На странице работает экскурсовод: посетитель выбирает место, задаёт вопрос — и программа сопоставляет его с подготовленными сведениями и показывает фрагмент видео. Языковая модель здесь не используется, поэтому ответ есть только на то, что есть в материалах. Так история школы и посёлка доступна и за пределами музея.</aside>
 </section>
 
-<!-- 13 · Дома -->
-<section class="slide s-games" data-tod="0.83" data-tone="dark" data-plane="hide">
-  <p class="kicker" data-r="up">2.3 · дома, после уроков</p>
-  <h2 class="h" data-r="mask"><span class="tw"><span>Вечером — шахматы,</span></span> <span class="tw"><span>игры и&nbsp;план</span></span></h2>
-  <div class="games">
-    <div data-r="up"><span class="mono-k">ChessBel · отдельное приложение [8]</span><p>Игра с&nbsp;компьютером, онлайн или&nbsp;вдвоём, задачи, книга дебютов, рейтинг и&nbsp;турниры. На&nbsp;высоких уровнях — движок Stockfish, на&nbsp;начальных — учебный алгоритм.</p></div>
-    <div data-r="up"><span class="mono-k">В боте</span><p>Ребусы, викторина и&nbsp;«Кодовый замок» — чтобы переключиться и&nbsp;потренировать логику.</p></div>
-    <div data-r="up"><span class="mono-k">Планировщик</span><p>Список дел и&nbsp;учебный таймер: выделить время на&nbsp;одну задачу.</p></div>
-  </div>
-  <figure class="phone ph-g1" data-r="img"><img src="img/shots/chess-home.webp" alt="Главный экран ChessBel"></figure>
-  <figure class="phone ph-g2" data-r="img"><img src="img/shots/chess-opening.webp" alt="Книга дебютов в ChessBel"></figure>
-  <p class="note" data-r="up">Игровые очки — не&nbsp;школьные отметки; таймер не&nbsp;измеряет внимание.</p>
-  <aside class="notes">Вечером, дома, можно открыть ChessBel — наше шахматное приложение: игра с компьютером, онлайн или вдвоём, задачи, книга дебютов, рейтинг и турниры. На высоких уровнях работает движок Stockfish, на начальных — учебный алгоритм. В самом боте есть ребусы, викторина и «Кодовый замок», а для самостоятельной работы — список дел и учебный таймер. Игровые очки — не школьные отметки.</aside>
+<!-- Глава · Проверка в классе -->
+<section class="slide s-div s-div-check" data-ch="check" data-tod="0.85" data-tone="dark" data-plane="digits" data-chi="4">
+  <p class="kicker" data-r="up">Глава 3 · опытное использование</p>
+  <div class="digits" data-r="up" aria-hidden="true"><span class="d1">1</span><span class="d2">5</span></div>
+  <h2 class="dt dt-mid" data-r="title"><span class="tw"><span>Проверка</span></span><span class="tw"><span>в классе</span></span></h2>
+  <p class="lead dl" data-r="up">15 одноклассников пользовались ботом с&nbsp;25.10 по&nbsp;14.11.2026</p>
+  <div class="route-map" data-chi="4"></div>
+  <aside class="notes">Третья глава — как бот проверяли в нашем классе.</aside>
 </section>
 
 <!-- 14 · Эксперимент -->
-<section class="slide s-exp" data-tod="0.86" data-tone="dark" data-plane="hide">
+<section class="slide s-exp" data-ch="check" data-tod="0.86" data-tone="dark" data-plane="hide">
   <p class="kicker" data-r="up">Глава 3 · опытное использование</p>
   <h2 class="h" data-r="mask"><span class="tw"><span>Три недели в&nbsp;классе</span></span></h2>
   <p class="lead exp-lead" data-r="up"><b>15&nbsp;одноклассников</b>, 11&nbsp;класс · 25.10&nbsp;—&nbsp;14.11.2026 · свои телефоны</p>
@@ -242,7 +278,7 @@
 </section>
 
 <!-- 15 · Данные -->
-<section class="slide s-data" data-tod="0.9" data-tone="dark" data-plane="hide">
+<section class="slide s-data" data-ch="check" data-tod="0.9" data-tone="dark" data-plane="hide">
   <p class="kicker" data-r="up">2.8 · данные и ограничения</p>
   <h2 class="h" data-r="mask"><span class="tw"><span>Данных — минимум,</span></span> <span class="tw"><span>роли — раздельно</span></span></h2>
   <ul class="ticks ticks-dark">
@@ -255,7 +291,7 @@
 </section>
 
 <!-- 16 · Перспективы -->
-<section class="slide s-next" data-tod="0.94" data-tone="dark" data-plane="next">
+<section class="slide s-next" data-ch="check" data-tod="0.94" data-tone="dark" data-plane="next">
   <p class="kicker" data-r="up">3.5 · перспективы</p>
   <h2 class="h" data-r="mask"><span class="tw"><span>Куда летим дальше</span></span></h2>
   <div class="nexts">
@@ -268,7 +304,7 @@
 </section>
 
 <!-- 17 · Итог -->
-<section class="slide s-final" data-tod="1" data-tone="dark" data-plane="final">
+<section class="slide s-final" data-ch="final" data-tod="1" data-tone="dark" data-plane="final">
   <p class="kicker" data-r="up">Заключение</p>
   <h2 class="h" data-r="mask"><span class="tw"><span>Что сделано</span></span></h2>
   <ol class="contrib">
@@ -282,7 +318,7 @@
 </section>
 
 <!-- 18 · Источники -->
-<section class="slide s-src" data-tod="1" data-tone="dark" data-plane="hide">
+<section class="slide s-src" data-ch="final" data-tod="1" data-tone="dark" data-plane="hide">
   <p class="kicker" data-r="up">Приложение</p>
   <h2 class="h h-small" data-r="mask"><span class="tw"><span>Источники</span></span></h2>
   <ol class="sources" data-r="up">
@@ -300,6 +336,9 @@
   <aside class="notes">Список источников — для вопросов жюри.</aside>
 </section>
 
+<figure id="phoneA" class="phone pp" aria-hidden="true"><img class="scr" alt=""><img class="scr2" alt=""></figure>
+<figure id="phoneB" class="phone pp" aria-hidden="true"><img class="scr" alt=""><img class="scr2" alt=""></figure>
+<div id="loupe" aria-hidden="true"></div>
 <div id="mailtag" aria-hidden="true"></div>
 <span id="ping" aria-hidden="true"></span>
 </main>

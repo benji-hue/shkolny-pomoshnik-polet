@@ -258,6 +258,51 @@ body.tone-dark #mailtag { background: rgba(10, 16, 36, .74); color: #f4f1ea; box
   font: 600 26px/1 var(--mono); color: var(--dawn-ink); background: rgba(255, 255, 255, .7); transform: rotate(-8deg); opacity: 0; }
 .qr-k { display: block; margin-bottom: 16px; font: 500 19px/1.2 var(--mono); color: var(--dawn-ink); }
 
+
+/* ---------- титулы глав ---------- */
+.s-div .dt { margin-top: 120px; font-size: 236px; font-weight: 780; line-height: .86; letter-spacing: -.052em; position: relative; z-index: 1; }
+.s-div .dt-mid { margin-top: 250px; font-size: 168px; }
+.s-div .dl { margin-top: 30px; max-width: 760px; color: var(--fg2); }
+.route-map { position: absolute; left: 120px; right: 120px; bottom: 112px; height: 120px; }
+.route-map svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.rm-line { fill: none; stroke: var(--line); stroke-width: 2; stroke-dasharray: 2 12; stroke-linecap: round; }
+.rm-done { fill: none; stroke: var(--acc); stroke-width: 3; stroke-linecap: round; }
+.rm-dot { fill: none; stroke: var(--fg2); stroke-width: 2.5; }
+.rm-dot.is-done { fill: var(--acc); stroke: var(--acc); }
+.rm-dot.is-cur { fill: var(--acc); stroke: var(--acc); }
+.rm-label { font: 500 22px var(--mono); fill: var(--fg2); }
+.rm-label.is-cur { fill: var(--fg); font-weight: 600; }
+.rm-plane path { fill: var(--fg); }
+/* письмо с фото на «Моей родине» */
+.letter { position: absolute; left: 880px; top: 250px; width: 720px; padding: 26px 26px 22px; border-radius: 6px; opacity: 0;
+  transform: rotate(-6deg); color: #15171c;
+  background:
+    linear-gradient(90deg, transparent 49.7%, rgba(20, 24, 40, .07) 50%, rgba(255, 255, 255, .55) 50.3%, transparent 50.8%),
+    linear-gradient(180deg, transparent 49.7%, rgba(20, 24, 40, .06) 50%, rgba(255, 255, 255, .5) 50.3%, transparent 50.8%),
+    linear-gradient(165deg, #fbfaf6 0%, #efebe2 100%);
+  box-shadow: 0 60px 120px -40px rgba(0, 0, 0, .75), 0 2px 0 rgba(255, 255, 255, .8) inset; }
+.letter img { display: block; width: 100%; border-radius: 3px; filter: saturate(.92) contrast(1.02); }
+.letter figcaption { margin-top: 16px; font: 500 22px/1.2 var(--mono); color: var(--dawn-ink); }
+/* гигантские контурные цифры «15» */
+.digits { position: absolute; right: 90px; top: 30px; font: 800 760px/.8 var(--sans); letter-spacing: -.07em; color: transparent;
+  -webkit-text-stroke: 3px rgba(244, 241, 234, .82); pointer-events: none; }
+.digits span { display: inline-block; }
+/* ---------- сквозной телефон главы «Учебный день» ---------- */
+.pp { left: 0; top: 0; opacity: 0; z-index: 6; transform-origin: 50% 50%; will-change: transform; }
+.pp .scr2 { position: absolute; left: 11px; top: 11px; width: calc(100% - 22px); border-radius: 46px; opacity: 0; }
+/* видоискатель и лупа */
+.vf { position: absolute; pointer-events: none; opacity: 0; z-index: 3; }
+.vf i { position: absolute; width: 26px; height: 26px; border: 4px solid var(--dawn); }
+.vf i:nth-child(1) { left: -8px; top: -8px; border-right: 0; border-bottom: 0; border-radius: 10px 0 0 0; }
+.vf i:nth-child(2) { right: -8px; top: -8px; border-left: 0; border-bottom: 0; border-radius: 0 10px 0 0; }
+.vf i:nth-child(3) { left: -8px; bottom: -8px; border-right: 0; border-top: 0; border-radius: 0 0 0 10px; }
+.vf i:nth-child(4) { right: -8px; bottom: -8px; border-left: 0; border-top: 0; border-radius: 0 0 10px 0; }
+#loupe { position: absolute; left: 0; top: 0; z-index: 7; opacity: 0; border-radius: 22px; background-color: #0e1621; background-repeat: no-repeat;
+  box-shadow: 0 34px 80px -26px rgba(8, 16, 36, .7), 0 0 0 4px var(--dawn); pointer-events: none; }
+/* «Учитель»: телефон слева, текст справа */
+.s-teacher { padding-left: 660px; }
+.s-teacher .note { left: 660px; }
+
 /* HUD */
 #hud { position: fixed; z-index: 5; left: 0; bottom: 0; display: flex; align-items: center; gap: 22px; pointer-events: none; transform-origin: 0 100%; }
 .hud-track { position: relative; width: 300px; height: 2px; background: var(--hud); border-radius: 2px; }
