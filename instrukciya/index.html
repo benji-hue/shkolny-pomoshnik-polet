@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Школьный помощник — инструкция</title>
+<meta name="description" content="Подробная инструкция к Telegram-боту «Школьный помощник» ГУО «Средняя школа п. Мухавец»: для учеников, учителей и администратора.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath d=%22M2 12 22 3 15 21 11.5 13.5Z%22 fill=%22%23ff7a45%22/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-in">
+    <svg class="plane" viewBox="0 0 120 60" aria-hidden="true"><path d="M2 30 118 4 72 56 58 36Z" fill="#fff" opacity=".95"/><path d="M58 36 118 4 64 44Z" fill="#dfe4f0"/><path d="M58 36 64 44 62 52Z" fill="#c9d0e2"/></svg>
+    <div>
+      <p class="kick">Инструкция пользователя · версия от 16.11.2026</p>
+      <h1>Школьный помощник<span>Telegram-бот ГУО «Средняя школа п.&nbsp;Мухавец»</span></h1>
+      <p class="lead">Расписание, домашние задания и отметки, помощь в учёбе, подготовка к ЦЭ и ЦТ, выбор вуза, школьный музей и игры — в одном чате. Здесь по шагам описано, как пользоваться ботом ученику, учителю и администратору.</p>
+      <div class="actions no-print">
+        <a class="btn-l pri" href="https://t.me/school_qwen_helper_26_bot">Открыть бота в Telegram</a>
+        <a class="btn-l sec" href="instrukciya.pdf" download>Скачать PDF</a>
+      </div>
+    </div>
+    <div class="hero-qr">
+      <img src="qr-bot.svg" alt="QR-код Telegram-бота">
+      <p>Бот: t.me/school_qwen_<br>helper_26_bot</p>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav class="toc" aria-label="Содержание">
+    <h2>Содержание</h2>
+    <ol>
+      <li><a href="#start">Быстрый старт</a></li>
+      <li><a href="#menu">Главное меню</a></li>
+      <li><a href="#day">Мой день: расписание и задания</a></li>
+      <li><a href="#study">Учёба: вопросы, учебники, перевод</a></li>
+      <li><a href="#krok">«Крок»: подготовка к ЦЭ и ЦТ</a></li>
+      <li><a href="#home">Моя родина: музей</a></li>
+      <li><a href="#more">Ещё: игры, вузы, дела, настройки</a></li>
+      <li><a href="#teacher">Для учителя</a></li>
+      <li><a href="#admin">Для администратора</a></li>
+      <li><a href="#notify">Уведомления</a></li>
+      <li><a href="#ai">Лимиты ИИ и точность ответов</a></li>
+      <li><a href="#data">Данные и приватность</a></li>
+      <li><a href="#cmds">Все команды</a></li>
+      <li><a href="#faq">Если что-то не работает</a></li>
+    </ol>
+    <div class="who">
+      <p><b>Ученику</b> — разделы 1–7, 10–14.</p>
+      <p><b>Учителю</b> — разделы 1, 8, 10, 11.</p>
+      <p><b>Администратору</b> — разделы 1, 9, 12.</p>
+    </div>
+  </nav>
+
+  <main>
+
+<!-- 1 -->
+<section class="sec" id="start">
+  <div class="sec-h"><span class="n">01</span><h2>Быстрый старт</h2></div>
+  <div class="cols">
+    <div class="text">
+      <p class="intro">Отдельное приложение ставить не нужно: бот работает внутри Telegram на телефоне и компьютере.</p>
+      <ol class="steps">
+        <li><b>Откройте бота</b>Перейдите по ссылке <a href="https://t.me/school_qwen_helper_26_bot">t.me/school_qwen_helper_26_bot</a> или наведите камеру на QR-код и нажмите <span class="b">Запустить</span> (Start).</li>
+        <li><b>Выберите язык</b>Русский или белорусский — на нём будут кнопки и ответы. Язык можно сменить в любой момент: <span class="b">Настройки</span> → <span class="b">Язык</span> или команда <code>/language</code>.</li>
+        <li><b>Выберите, как войти</b><span class="b">Попробовать без регистрации</span> — гостевой режим, открывается сразу. <span class="b">Подать заявку ученика</span> — полный доступ к школьным разделам после одобрения.</li>
+        <li><b>Заполните заявку</b>Шаг 1 из 2: напишите имя и фамилию (до 100 символов). Шаг 2 из 2: выберите свой класс кнопкой. Бот ответит: «Заявка отправлена администратору. Жди одобрения».</li>
+        <li><b>Дождитесь одобрения</b>Придёт сообщение «Администратор одобрил заявку». Нажмите <code>/menu</code> — откроется главное меню.</li>
+      </ol>
+      <div class="note"><b>Пока заявка на рассмотрении</b>Можно пользоваться гостевым режимом. После одобрения имя и класс закрепляются — исправить их может только администратор.</div>
+    </div>
+    <div class="shots">
+      <figure class="ph"><div class="scr"><img src="img/ph-reg-1.webp" alt="Выбор способа входа и шаг 1 заявки"></div><figcaption>Выбор входа и шаг 1: имя и фамилия</figcaption></figure>
+      <figure class="ph"><div class="scr"><img src="img/ph-reg-2.webp" alt="Выбор класса и одобрение заявки"></div><figcaption>Шаг 2: класс. Затем — одобрение</figcaption></figure>
+    </div>
+  </div>
+  <h3>Что доступно гостю, а что — ученику</h3>
+  <table class="tbl access">
+    <thead><tr><th>Возможность</th><th>Гость</th><th>Ученик после одобрения</th></tr></thead>
+    <tbody>
+      <tr><td>Расписание класса, звонки</td><td class="y">да</td><td class="y">да</td></tr>
+      <tr><td>Учёба: объяснения, задачи, учебники, формулы, перевод</td><td class="y">да</td><td class="y">да</td></tr>
+      <tr><td>«Крок», музей, игры, «Куда поступать», «Мои дела»</td><td class="y">да</td><td class="y">да</td></tr>
+      <tr><td>Домашние задания своего класса</td><td class="n">нет</td><td class="y">да</td></tr>
+      <tr><td>Отметки учителя и итоги дня</td><td class="n">нет</td><td class="y">да</td></tr>
+      <tr><td>Утреннее расписание в 07:30</td><td class="n">нет</td><td class="y">да</td></tr>
+      <tr><td>«Мои оценки» — личный дневник</td><td class="n">нет</td><td class="y">да</td></tr>
+    </tbody>
+  </table>
+  <p>Если гость откроет закрытый раздел, бот ответит: «Этот школьный раздел доступен после одобрения заявки». Чтобы подать заявку, отправьте <code>/start</code> и нажмите <span class="b">Подать заявку</span>.</p>
+</section>
+
+<!-- 2 -->
+<section class="sec" id="menu">
+  <div class="sec-h"><span class="n">02</span><h2>Главное меню</h2></div>
+  <div class="cols">
+    <div class="text">
+      <p class="intro">Ботом управляют кнопками внизу экрана. Команды вводить не обязательно — они нужны только для быстрых действий.</p>
+      <div class="btn-grid">
+        <div><span class="b">Мой день</span><p>Расписание на сегодня, завтра и неделю, звонки, домашние задания, выбор класса.</p></div>
+        <div><span class="b">Учёба</span><p>Объяснить тему, решить задачу, потренироваться, учебники, формулы, перевод.</p></div>
+        <div><span class="b">Домашнее задание</span><p>Задания вашего класса от учителей (после одобрения заявки).</p></div>
+        <div><span class="b">Крок</span><p>Тренажёр для подготовки к ЦЭ и ЦТ.</p></div>
+        <div><span class="b">Моя родина</span><p>Школьный музей и памятные места Мухавца.</p></div>
+        <div><span class="b">Ещё</span><p>Игры, «Куда поступать», мои дела, мои оценки, настройки, помощь.</p></div>
+        <div><span class="b">Подать заявку</span><p>Видна в гостевом режиме: заявка ученика на полный доступ.</p></div>
+      </div>
+      <div class="note"><b>Пропали кнопки?</b>Нажмите кнопку меню слева от поля ввода или отправьте <code>/menu</code>. Кнопка <span class="b">Главное меню</span> возвращает сюда из любого раздела.</div>
+    </div>
+    <div class="shots">
+      <figure class="ph"><div class="scr"><img src="img/ph-menu.webp" alt="Приветствие и главное меню ученика"></div><figcaption>Меню ученика после одобрения</figcaption></figure>
+      <figure class="ph"><div class="scr"><img src="img/menu.webp" alt="Главное меню в гостевом режиме"></div><figcaption>Меню гостя: есть кнопка «Подать заявку»</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 3 -->
+<section class="sec" id="day">
+  <div class="sec-h"><span class="n">03</span><h2>Мой день: расписание и задания</h2></div>
+  <div class="cols">
+    <div class="text">
+      <p class="intro">Всё, что нужно на учебный день, — в одном разделе. Данные относятся к выбранному классу.</p>
+      <div class="btn-grid">
+        <div><span class="b">Сегодня</span> <span class="b">Завтра</span><p>Уроки по порядку: время, предмет и кабинет (если он указан), номер смены.</p></div>
+        <div><span class="b">Неделя</span><p>Расписание на всю неделю по дням.</p></div>
+        <div><span class="b">Звонки</span><p>Время начала и конца каждого урока.</p></div>
+        <div><span class="b">Домашние задания</span><p>Задания, которые внесли учителя вашего класса.</p></div>
+        <div><span class="b">Мой класс</span><p>Выбор класса: 5А–11А.</p></div>
+      </div>
+      <ul class="list">
+        <li><b>Класс.</b> В гостевом режиме класс можно менять сколько угодно (<span class="b">Мой класс</span> или <code>/change</code>). После одобрения заявки класс закреплён — изменить его может администратор.</li>
+        <li><b>Утреннее расписание.</b> Ученику после одобрения каждое утро в 07:30 по минскому времени приходит расписание на день. Время меняется в <span class="b">Настройки</span> → <span class="b">Напоминания</span> → <span class="b">Изменить время</span>.</li>
+        <li><b>Актуальность.</b> Расписание загружено из школьных документов. Если в школе что-то поменялось, данные бота обновляют ответственные.</li>
+      </ul>
+    </div>
+    <div class="shots">
+      <figure class="ph"><div class="scr"><img src="img/week.webp" alt="Расписание на неделю"></div><figcaption>Расписание на неделю</figcaption></figure>
+      <figure class="ph"><div class="scr"><img src="img/ph-day-1.webp" alt="Утреннее расписание в 07:30"></div><figcaption>Утреннее сообщение в 07:30</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 4 -->
+<section class="sec" id="study">
+  <div class="sec-h"><span class="n">04</span><h2>Учёба: вопросы, учебники, перевод</h2></div>
+  <div class="cols">
+    <div class="text">
+      <p class="intro">Учебный помощник объясняет темы, разбирает задачи по шагам и подсказывает, где это в учебнике. Можно просто написать вопрос в чат.</p>
+      <div class="btn-grid">
+        <div><span class="b">Объясни тему</span><p>Простое объяснение. Команда: <code>/explain тема</code>.</p></div>
+        <div><span class="b">Решить задачу</span><p>Разбор по шагам. Команда: <code>/steps задача</code>.</p></div>
+        <div><span class="b">Потренироваться</span><p>Упражнение с подсказкой. Команда: <code>/practice тема</code>.</p></div>
+        <div><span class="b">Учебники</span><p>Учебники выбранного класса (5–11). В ответе бот укажет учебник и страницу.</p></div>
+        <div><span class="b">Формулы</span><p>Короткая справка: площади, теорема Пифагора, скорость, плотность.</p></div>
+        <div><span class="b">Перевод RU → BE</span><p>Перевод с русского на белорусский, до 1500 символов. <span class="b">Отмена</span> — выйти.</p></div>
+      </div>
+    </div>
+    <div class="shots">
+      <figure class="ph"><div class="scr"><img src="img/study.webp" alt="Меню раздела Учёба"></div><figcaption>Раздел «Учёба»</figcaption></figure>
+    </div>
+  </div>
+  <div class="cols">
+    <div class="text">
+      <h3>Как задать вопрос и уточнить ответ</h3>
+      <ol class="steps">
+        <li><b>Напишите вопрос</b>Укажите предмет и что именно непонятно. Хорошо: «Алгебра, 11 класс: как решать показательные неравенства? Покажи на примере». Плохо: «помоги с домашкой».</li>
+        <li><b>Дождитесь ответа</b>Бот обрабатывает один вопрос за раз. Пока ответ готовится, не отправляйте следующий.</li>
+        <li><b>Уточняйте кнопками</b>
+          <span class="b">Проще</span> — объяснить проще,
+          <span class="b">Пример</span> — привести пример,
+          <span class="b">Проверь меня</span> — вопрос для самопроверки,
+          <span class="b">Источник</span> — учебник и страница, если источник найден.
+          Можно и просто написать уточнение — разговор по теме сохраняется.</li>
+        <li><b>Новая тема</b><span class="b">Новая тема</span> или <code>/reset</code> очищает разговор. Простое открытие меню разговор не сбрасывает.</li>
+      </ol>
+      <div class="note warn"><b>Ответ ИИ нужно проверять</b>Убедительный ответ не обязательно верный. Сверяйте его с учебником (кнопка <span class="b">Источник</span>), а за задания и отметки отвечает учитель. Подробнее — в разделе <a href="#ai">11</a>.</div>
+      <p>В библиотеке бота 114 учебников и 25&nbsp;622 страницы, 25&nbsp;552 из них доступны для поиска (на 13.11.2026). Поиск учитывает выбранный класс.</p>
+    </div>
+    <div class="shots">
+      <figure class="ph"><div class="scr"><img src="img/ph-bot-study.webp" alt="Ответ с указанием источника"></div><figcaption>Ответ с источником: учебник и страница</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 5 -->
+<section class="sec" id="krok">
+  <div class="sec-h"><span class="n">05</span><h2>«Крок»: подготовка к ЦЭ и ЦТ</h2></div>
+  <div class="cols">
+    <div class="text">
+      <p class="intro">«Крок» — отдельный сайт-тренажёр, который открывается прямо из бота.</p>
+      <ol class="steps">
+        <li><b>Откройте раздел</b><span class="b">Главное меню</span> → <span class="b">Крок</span> или <span class="b">Учёба</span> → <span class="b">ЦЭ/ЦТ · Крок</span>. Команды: <code>/krok</code> или <code>/ct</code>.</li>
+        <li><b>Нажмите «Открыть Крок»</b>Сайт откроется внутри Telegram. Интерфейс — на русском.</li>
+        <li><b>Выберите предметы</b>Дальше — план занятий, тренировки по предметам, блиц формул, пробные задания, повторение тем и репетитор для разбора ошибок.</li>
+      </ol>
+      <ul class="list">
+        <li>Прогресс в «Кроке» ведётся отдельно от школьного бота.</li>
+        <li>Прогноз баллов — ориентир по вашим ответам, а не гарантия результата экзамена.</li>
+      </ul>
+    </div>
+    <div class="shots">
+      <figure class="ph"><div class="scr"><img src="img/krok.webp" alt="Раздел Крок в боте"></div><figcaption>Кнопка «Открыть Крок»</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 6 -->
+<section class="sec" id="home">
+  <div class="sec-h"><span class="n">06</span><h2>Моя родина: музей и памятные места</h2></div>
+  <div class="cols">
+    <div class="text">
+      <p class="intro">Краеведческий раздел ведёт на сайт школьного музея и памятных мест Мухавца.</p>
+      <ul class="list">
+        <li>Нажмите <span class="b">Моя родина</span> → <span class="b">Открыть общую страницу</span> (или команда <code>/museum</code>).</li>
+        <li>Выберите место: школьный музей, памятник Сергею Богданчуку или памятник землякам. Для каждого есть виртуальная прогулка, видеорассказ, фотографии и заметки исследователя.</li>
+        <li>На странице работает экскурсовод: выберите место и задайте вопрос. Он отвечает только по подготовленным материалам (без ИИ) и может открыть фрагмент источника. Если материала нет — ответа не будет.</li>
+        <li>Открыть сайт во внешнем браузере можно через меню страницы в Telegram.</li>
+      </ul>
+    </div>
+    <div class="shots">
+      <figure class="ph"><div class="scr"><img src="img/home.webp" alt="Раздел Моя родина"></div><figcaption>Вход на страницу музея</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 7 -->
+<section class="sec" id="more">
+  <div class="sec-h"><span class="n">07</span><h2>Ещё: игры, вузы, дела, настройки</h2></div>
+  <p class="intro">Кнопка <span class="b">Ещё</span> в главном меню открывает дополнительные разделы.</p>
+  <div class="cols">
+    <div class="text">
+      <h3>Игры</h3>
+      <ul class="list">
+        <li><span class="b">ChessBel</span> — шахматное приложение: игра с компьютером, онлайн или вдвоём на одном устройстве, задачи, книга дебютов, рейтинг. Профиль ChessBel хранится отдельно; школу в профиле указывают сами.</li>
+        <li><span class="b">Кодовый замок</span> — угадайте код из четырёх разных цифр за 10 ходов. Напишите четыре цифры, например <code>0123</code>. Цель — цифра на своём месте, стрелки — цифра есть в коде, но стоит в другом месте. <span class="b">Новый код</span> начинает заново.</li>
+        <li><span class="b">Ребусы</span>, <span class="b">Викторина</span>, <span class="b">Факт</span>, <span class="b">Слово дня</span> (английское слово) — короткая разминка.</li>
+      </ul>
+      <p>Игровые очки и достижения — не школьные отметки.</p>
+    </div>
+    <div class="shots">
+      <figure class="ph"><div class="scr"><img src="img/more.webp" alt="Меню Ещё"></div><figcaption>Меню «Ещё»</figcaption></figure>
+    </div>
+  </div>
+  <div class="cols">
+    <div class="text">
+      <h3>Куда поступать</h3>
+      <ul class="list">
+        <li><span class="b">Подбор вуза</span> — выберите предметы и баллы, бот найдёт варианты.</li>
+        <li><span class="b">Найти вуз</span> — поиск по названию и городу. <span class="b">Все вузы</span> — каталог: в карточке вуза факультеты, баллы и контакты.</li>
+        <li><span class="b">О баллах</span> — как считается конкурсный балл: ЦЭ/ЦТ по языку + два профильных результата + средний балл аттестата в 100-балльной шкале, максимум 400.</li>
+        <li><span class="b">Спросить ИИ</span> — вопрос о поступлении свободным текстом.</li>
+      </ul>
+      <div class="note"><b>Данные — «Адукар», на 04.11.2026</b>Прошлые проходные баллы не гарантируют поступление в 2027 году. Правила своего года уточняйте в приёмной комиссии. Подбор кнопками работает без ИИ.</div>
+    </div>
+    <div class="shots">
+      <figure class="ph"><div class="scr"><img src="img/adm.webp" alt="Раздел Куда поступать"></div><figcaption>«Куда поступать»</figcaption></figure>
+    </div>
+  </div>
+  <div class="cols">
+    <div class="text">
+      <h3>Мои дела и таймер</h3>
+      <p><span class="b">Добавить дело</span>, <span class="b">Список дел</span>, <span class="b">Таймер 25 мин</span>, <span class="b">Прогресс</span>. Список дел виден только вам. Таймер помогает выделить время на одну задачу и присылает сообщение, когда время вышло.</p>
+      <p>Команды: <code>/addtask Прочитать главу</code>, <code>/done номер</code>, <code>/deltask номер</code>, <code>/focus 25</code>, <code>/stopfocus</code>.</p>
+      <h3>Мои оценки</h3>
+      <p>Доступно после одобрения заявки. Здесь отметки и личный дневник: свои оценки, темы ошибок, четверти и цель по баллам. Эти записи не видны другим ученикам и не передаются ИИ. Отметки учителя — также командой <code>/journal</code>; удалить запись дневника — <code>/gradedel</code>.</p>
+      <h3>Настройки и помощь</h3>
+      <p><span class="b">Настройки</span>: <span class="b">Язык</span>, <span class="b">Мой класс</span>, <span class="b">Напоминания</span>, <span class="b">Мои оценки</span>, <span class="b">О боте</span>, <span class="b">Мои данные</span> (что хранит бот и как удалить профиль). <span class="b">Помощь</span> — полный список команд, он же в разделе <a href="#cmds">13</a>.</p>
+    </div>
+    <div class="shots">
+      <figure class="ph"><div class="scr"><img src="img/todo.webp" alt="Мои дела"></div><figcaption>«Мои дела»</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 8 -->
+<section class="sec pb" id="teacher">
+  <div class="sec-h"><span class="n">08</span><h2>Для учителя</h2></div>
+  <div class="cols">
+    <div class="text">
+      <p class="intro">Роль учителя назначает администратор. После этого в боте появляется панель учителя: домашние задания и отметки.</p>
+      <h3>Домашнее задание</h3>
+      <ol class="steps">
+        <li><b>Выберите класс и предмет</b></li>
+        <li><b>Введите текст задания и дату</b>Например: «§ 14, задачи 3–5» на 17.11.</li>
+        <li><b>Проверьте и подтвердите</b>Бот покажет, что получилось. После подтверждения ученики класса получат уведомление, а задание появится у них в разделе «Домашние задания».</li>
+      </ol>
+      <p>Быстрый способ одной командой: <code>/addhw 2026-11-17 | Физика | § 14, задачи 3–5</code>. Удалить задание: <code>/delhw номер</code> — ученики тоже получат уведомление.</p>
+      <h3>Отметка</h3>
+      <ol class="steps">
+        <li><b>Выберите ученика</b>Класс → список учеников.</li>
+        <li><b>Укажите предмет, отметку и дату</b>При необходимости — комментарий, например «самостоятельная».</li>
+        <li><b>Подтвердите</b>Ученик сразу получит личное сообщение «Учитель поставил отметку».</li>
+      </ol>
+      <ul class="list">
+        <li><b>Итоги дня.</b> Через час после последнего урока класса бот присылает ученикам итоги: отметки за день или сообщение, что их нет.</li>
+        <li><b>Статистика</b> — <code>/stats</code> или в настройках учителя.</li>
+        <li>Бот не узнаёт оценки сам: в журнал попадает только то, что внёс учитель. Ученик видит только свои отметки.</li>
+        <li>Имена, классы и отметки учеников не передаются ИИ.</li>
+      </ul>
+    </div>
+    <div class="shots">
+      <figure class="ph"><div class="scr"><img src="img/ph-day-3.webp" alt="Что получает ученик: отметка, задание, итоги дня"></div><figcaption>Что получает ученик: отметка, задание и итоги дня</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 9 -->
+<section class="sec" id="admin">
+  <div class="sec-h"><span class="n">09</span><h2>Для администратора</h2></div>
+  <p class="intro">Администратор отвечает за доступ: кто ученик, кто учитель, и чтобы данные были верными.</p>
+  <div class="btn-grid">
+    <div><b>Заявки</b><p>Видны имя, фамилия, класс и Telegram ID. Заявку можно одобрить или отклонить; ученику придёт сообщение о решении.</p></div>
+    <div><b>Начавшие регистрацию</b><p>Список тех, кто начал заявку, но не закончил.</p></div>
+    <div><b>Ученики и учителя</b><p>Назначить учителя, исправить имя и класс ученика.</p></div>
+  </div>
+  <div class="note warn"><b>Одобрение не проверяет личность</b>Сверяйте заявку со списком класса. Школе нужно заранее назначить ответственных за расписание, учётные записи и данные.</div>
+  <p>Расписание бот берёт из школьных документов. Если в школе изменилось расписание, звонки или каникулы, данные в боте нужно обновить — иначе ученики увидят старое расписание.</p>
+</section>
+
+<!-- 10 -->
+<section class="sec" id="notify">
+  <div class="sec-h"><span class="n">10</span><h2>Уведомления</h2></div>
+  <div class="cols">
+    <div class="text">
+      <p class="intro">Бот пишет сам только по делу. Всё, кроме отметок учителя, можно отключить.</p>
+      <table class="tbl">
+        <thead><tr><th>Что приходит</th><th>Когда</th><th>Как настроить</th></tr></thead>
+        <tbody>
+          <tr><td>Расписание на день</td><td>в 07:30 по Минску (после одобрения)</td><td><span class="b">Настройки</span> → <span class="b">Напоминания</span>; <code>/settime 07:30</code>, <code>/unsubscribe</code></td></tr>
+          <tr><td>Новое или удалённое ДЗ</td><td>сразу после действия учителя</td><td>—</td></tr>
+          <tr><td>Отметка учителя</td><td>сразу после подтверждения</td><td>—</td></tr>
+          <tr><td>Итоги учебного дня</td><td>через час после последнего урока класса</td><td><code>/gradeoff</code> — пауза, <code>/gradeon</code> — вернуть</td></tr>
+          <tr><td>Таймер учёбы</td><td>когда время вышло</td><td><code>/stopfocus</code></td></tr>
+        </tbody>
+      </table>
+      <ul class="list">
+        <li>Проверить подписку: <span class="b">Моя подписка</span> или <code>/mysubs</code>. Включить снова: <span class="b">Включить</span> или <code>/subscribe</code>.</li>
+        <li>На каникулах обычные уведомления о занятиях приостанавливаются.</li>
+        <li>Сообщение не придёт, если бот заблокирован, уведомления чата выключены в Telegram или нет интернета.</li>
+      </ul>
+    </div>
+    <div class="shots">
+      <figure class="ph"><div class="scr"><img src="img/limits.webp" alt="Напоминания и доступ к ИИ"></div><figcaption>«Напоминания» и ответ на <code>/limits</code></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 11 -->
+<section class="sec pb" id="ai">
+  <div class="sec-h"><span class="n">11</span><h2>Лимиты ИИ и точность ответов</h2></div>
+  <p class="intro">Учебные ответы готовят языковые модели в облаке Cloudflare в пределах бесплатной квоты. Сейчас действуют такие правила:</p>
+  <div class="limits">
+    <div><span class="v">10 000 / сутки</span>вычислительных единиц Cloudflare — общий ресурс ИИ на аккаунт. Это не количество сообщений.</div>
+    <div><span class="v">03:00</span>квота обновляется каждый день в 03:00 по Москве и Минску.</div>
+    <div><span class="v">до 1500 символов</span>в одном вопросе. Длинный текст разбейте на части.</div>
+    <div><span class="v">1 вопрос</span>обрабатывается у одного пользователя одновременно — дождитесь ответа.</div>
+    <div><span class="v">нет нормы</span>фиксированного числа вопросов в день нет: оно зависит от модели и длины ответов. Остаток квоты пока не измеряется.</div>
+    <div><span class="v">0 единиц</span>тратят кнопочные разделы: расписание, звонки, подбор вуза кнопками, игры, музей — они работают без ИИ.</div>
+  </div>
+  <p>Текущее состояние — команда <code>/limits</code>. Платный сервис автоматически не подключается.</p>
+
+  <h3>Насколько точны ответы</h3>
+  <div class="stats2">
+    <div><span class="v">80–90%</span><b>учебные ответы на русском</b><p>предварительная оценка точности</p></div>
+    <div><span class="v">70–75%</span><b>переводы и ответы на белорусском</b><p>предварительная оценка точности</p></div>
+  </div>
+  <p>Это оценки авторов проекта по опыту использования, а не измерение на всех вопросах. Поэтому:</p>
+  <ul class="list">
+    <li>сверяйте ответ с учебником — кнопка <span class="b">Источник</span> покажет учебник и страницу, если они найдены;</li>
+    <li>важные тексты на белорусском проверяйте у учителя или по словарю;</li>
+    <li>если ответ запутался — <span class="b">Проще</span>, <span class="b">Пример</span> или <span class="b">Новая тема</span>;</li>
+    <li>задания и отметки ставит учитель, а не бот.</li>
+  </ul>
+</section>
+
+<!-- 12 -->
+<section class="sec" id="data">
+  <div class="sec-h"><span class="n">12</span><h2>Данные и приватность</h2></div>
+  <p class="intro">Бот хранит только то, что нужно для работы. Подробно — в <span class="b">Настройки</span> → <span class="b">Мои данные</span> или командой <code>/privacy</code>.</p>
+  <table class="tbl">
+    <thead><tr><th>Что</th><th>Где и кому видно</th></tr></thead>
+    <tbody>
+      <tr><td>Имя, фамилия, класс, Telegram ID (заявка)</td><td>Администратору и учителям. ИИ не передаются.</td></tr>
+      <tr><td>Домашние задания и отметки</td><td>Ученику — только свои. Учителю — его классы. ИИ не передаются.</td></tr>
+      <tr><td>Класс, язык, подписка, дела, таймеры, учебные очки</td><td>В вашем профиле в базе бота.</td></tr>
+      <tr><td>Текст учебного вопроса и до 3 последних пар «вопрос — ответ»</td><td>Отправляются ИИ-сервисам для ответа. Имя, Telegram ID и личные дела в запрос не входят.</td></tr>
+    </tbody>
+  </table>
+  <div class="note warn"><b>Не пишите в вопросах личные данные</b>Адрес, телефон, пароли, данные одноклассников — в учебный вопрос они не нужны.</div>
+  <ul class="list">
+    <li><code>/reset</code> — очистить контекст разговора с ИИ.</li>
+    <li><code>/delete_me</code> — удалить профиль, заявку, отметки, дела и прогресс из рабочей базы бота. Чтобы вернуться, понадобится новое одобрение. Профиль ChessBel удаляется отдельно.</li>
+    <li>Копии сообщений у Telegram и провайдеров ИИ регулируются их правилами.</li>
+  </ul>
+</section>
+
+<!-- 13 -->
+<section class="sec pb" id="cmds">
+  <div class="sec-h"><span class="n">13</span><h2>Все команды</h2></div>
+  <p class="intro">Команду можно напечатать или выбрать в меню команд Telegram. Всё это есть и на кнопках.</p>
+  <div class="cmds">
+    <div><h3>Разделы</h3><table class="tbl"><tbody>
+      <tr><td><code>/menu</code></td><td>главное меню</td></tr>
+      <tr><td><code>/study</code></td><td>помощь в учёбе</td></tr>
+      <tr><td><code>/school</code></td><td>школьные дела</td></tr>
+      <tr><td><code>/planner</code></td><td>мой день</td></tr>
+      <tr><td><code>/games</code></td><td>игры и ChessBel</td></tr>
+      <tr><td><code>/museum</code></td><td>музей и памятные места</td></tr>
+      <tr><td><code>/settings</code></td><td>настройки</td></tr>
+      <tr><td><code>/info</code></td><td>о проекте</td></tr>
+    </tbody></table></div>
+    <div><h3>Учёба</h3><table class="tbl"><tbody>
+      <tr><td><code>/ask вопрос</code></td><td>задать вопрос (или просто напишите его)</td></tr>
+      <tr><td><code>/explain тема</code></td><td>простое объяснение</td></tr>
+      <tr><td><code>/steps задача</code></td><td>разбор по шагам</td></tr>
+      <tr><td><code>/practice тема</code></td><td>упражнение с подсказкой</td></tr>
+      <tr><td><code>/krok</code>, <code>/ct</code></td><td>«Крок»: ЦЭ и ЦТ</td></tr>
+      <tr><td><code>/admissions</code></td><td>вузы и проходные баллы</td></tr>
+      <tr><td><code>/books</code></td><td>учебники класса (5–11)</td></tr>
+      <tr><td><code>/formula</code></td><td>формулы</td></tr>
+      <tr><td><code>/translate текст</code></td><td>перевод RU → BE</td></tr>
+      <tr><td><code>/language</code></td><td>язык интерфейса и ответов</td></tr>
+      <tr><td><code>/reset</code></td><td>новая тема, конец викторины</td></tr>
+    </tbody></table></div>
+    <div><h3>Школьные дела</h3><table class="tbl"><tbody>
+      <tr><td><code>/change</code></td><td>выбрать класс</td></tr>
+      <tr><td><code>/today</code>, <code>/tomorrow</code></td><td>расписание на сегодня, завтра</td></tr>
+      <tr><td><code>/week</code>, <code>/schedule</code></td><td>на неделю</td></tr>
+      <tr><td><code>/bell</code></td><td>звонки</td></tr>
+      <tr><td><code>/subject</code></td><td>предметы</td></tr>
+      <tr><td><code>/hw</code></td><td>домашние задания</td></tr>
+      <tr><td><code>/journal</code></td><td>мои отметки</td></tr>
+      <tr><td><code>/gradeoff</code>, <code>/gradeon</code></td><td>пауза и возврат итогов дня</td></tr>
+    </tbody></table></div>
+    <div><h3>Мой день</h3><table class="tbl"><tbody>
+      <tr><td><code>/todo</code></td><td>список дел</td></tr>
+      <tr><td><code>/addtask текст</code></td><td>добавить дело</td></tr>
+      <tr><td><code>/done номер</code></td><td>завершить дело</td></tr>
+      <tr><td><code>/deltask номер</code></td><td>удалить дело</td></tr>
+      <tr><td><code>/focus 25</code>, <code>/stopfocus</code></td><td>таймер учёбы</td></tr>
+      <tr><td><code>/progress</code></td><td>учебный прогресс</td></tr>
+      <tr><td><code>/limits</code></td><td>доступ к ИИ</td></tr>
+    </tbody></table></div>
+    <div><h3>Напоминания</h3><table class="tbl"><tbody>
+      <tr><td><code>/subscribe</code></td><td>включить</td></tr>
+      <tr><td><code>/unsubscribe</code></td><td>отключить</td></tr>
+      <tr><td><code>/settime 07:30</code></td><td>время напоминаний</td></tr>
+      <tr><td><code>/mysubs</code></td><td>моя подписка</td></tr>
+    </tbody></table></div>
+    <div><h3>Игры</h3><table class="tbl"><tbody>
+      <tr><td><code>/chess</code></td><td>ChessBel</td></tr>
+      <tr><td><code>/code</code>, <code>/coderules</code>, <code>/codehistory</code></td><td>«Кодовый замок», правила, ходы</td></tr>
+      <tr><td><code>/rebus</code>, <code>/rebusrules</code></td><td>ребусы и правила</td></tr>
+      <tr><td><code>/quiz</code>, <code>/word</code>, <code>/fact</code>, <code>/joke</code></td><td>викторина, слово, факт, шутка</td></tr>
+      <tr><td><code>/top</code></td><td>популярные классы</td></tr>
+    </tbody></table></div>
+    <div><h3>Для учителя</h3><table class="tbl"><tbody>
+      <tr><td><code>/addhw ГГГГ-ММ-ДД | Предмет | Задание</code></td><td>добавить ДЗ</td></tr>
+      <tr><td><code>/delhw номер</code></td><td>удалить ДЗ</td></tr>
+      <tr><td><code>/stats</code></td><td>статистика</td></tr>
+    </tbody></table></div>
+    <div><h3>Данные и помощь</h3><table class="tbl"><tbody>
+      <tr><td><code>/privacy</code></td><td>обработка данных</td></tr>
+      <tr><td><code>/delete_me</code></td><td>удалить профиль</td></tr>
+      <tr><td><code>/id</code></td><td>мой Telegram ID</td></tr>
+      <tr><td><code>/tour</code></td><td>презентация проекта</td></tr>
+      <tr><td><code>/start</code></td><td>начать заново</td></tr>
+    </tbody></table></div>
+  </div>
+</section>
+
+<!-- 14 -->
+<section class="sec" id="faq">
+  <div class="sec-h"><span class="n">14</span><h2>Если что-то не работает</h2></div>
+  <details class="faq"><summary>«Этот школьный раздел доступен после одобрения заявки»</summary><div>Вы в гостевом режиме. Отправьте <code>/start</code>, нажмите <span class="b">Подать заявку ученика</span> и дождитесь одобрения администратора.</div></details>
+  <details class="faq"><summary>Пропали кнопки внизу</summary><div>Нажмите кнопку меню слева от поля ввода или отправьте <code>/menu</code>.</div></details>
+  <details class="faq"><summary>Бот долго не отвечает на вопрос</summary><div>Ответ ИИ готовится — не отправляйте новый вопрос, пока не пришёл предыдущий ответ. Если ответа нет долго, повторите вопрос позже: суточная квота обновляется в 03:00 по Минску. Расписание, игры и другие кнопочные разделы работают и без ИИ.</div></details>
+  <details class="faq"><summary>Ответ неверный или слишком сложный</summary><div>Нажмите <span class="b">Проще</span> или <span class="b">Пример</span>, проверьте <span class="b">Источник</span>. Если бот путается в старом разговоре — <span class="b">Новая тема</span> или <code>/reset</code>. Уточните в вопросе предмет и класс.</div></details>
+  <details class="faq"><summary>Бот отвечает не на том языке</summary><div><span class="b">Настройки</span> → <span class="b">Язык</span> или команда <code>/language</code>.</div></details>
+  <details class="faq"><summary>В расписании чужой класс</summary><div>Гость: <span class="b">Мой день</span> → <span class="b">Мой класс</span> или <code>/change</code>. Ученик после одобрения: класс исправляет администратор.</div></details>
+  <details class="faq"><summary>Не пришло утреннее расписание</summary><div>Проверьте <span class="b">Моя подписка</span> (<code>/mysubs</code>) и время (<code>/settime</code>). Убедитесь, что бот не заблокирован и уведомления чата включены. На каникулах рассылка приостановлена.</div></details>
+  <details class="faq"><summary>Учитель сказал, что поставил отметку, а её нет</summary><div>Откройте <code>/journal</code>. Отметка появляется только после того, как учитель подтвердит запись в боте.</div></details>
+  <details class="faq"><summary>Хочу удалить свои данные</summary><div><code>/delete_me</code> удалит профиль, заявку, отметки, дела и прогресс из рабочей базы бота. Профиль ChessBel удаляется отдельно, в самом приложении.</div></details>
+
+  <footer>
+    <div>
+      <p><b>«Школьный помощник»</b> — исследовательская работа учащихся 11 класса Якушевича Арсения и Левчука Мирослава. Руководитель — Козик Анна Витальевна, учитель математики. ГУО «Средняя школа п.&nbsp;Мухавец», 2026.</p>
+      <p class="links"><a href="https://t.me/school_qwen_helper_26_bot">Бот в Telegram</a><a href="https://krok-ct.duckdns.org/">«Крок»</a><a href="https://z7bv4pbtvp-star.github.io/mukhavets-school-museum/">Музей Мухавца</a><a href="https://chessbel.school-helper-ai-bot.workers.dev/">ChessBel</a><a class="no-print" href="../">Презентация проекта</a></p>
+    </div>
+    <div class="guide-qr print-only"><img src="qr-guide.svg" alt="QR-код онлайн-версии инструкции">Онлайн-версия<br>инструкции</div>
+  </footer>
+</section>
+
+  </main>
+</div>
+<script>
+  // в печать и PDF — все ответы раскрыты
+  window.addEventListener("beforeprint", function () { document.querySelectorAll("details").forEach(function (d) { d.open = true; }); });
+</script>
+</body>
+</html>

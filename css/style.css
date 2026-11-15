@@ -46,10 +46,11 @@ body.tone-dark  { --hud: rgba(244, 241, 234, .55); --hud-strong: #f4f1ea; }
 .slide[data-tone="light"] { --fg: #15171c; --fg2: rgba(21, 23, 28, .74); --line: rgba(21, 23, 28, .2); --acc: var(--dawn-ink); --glass: rgba(255, 255, 255, .62); --glass-line: rgba(255, 255, 255, .9); }
 .slide[data-tone="dark"]  { --fg: #f4f1ea; --fg2: rgba(244, 241, 234, .78); --line: rgba(244, 241, 234, .26); --acc: var(--dawn-soft); --glass: rgba(14, 22, 48, .42); --glass-line: rgba(255, 255, 255, .14); }
 .slide .notes { display: none; }
-.slide[data-tone="dark"]::before { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: -1;
-  background: linear-gradient(90deg, rgba(8, 12, 32, .5) 0%, rgba(8, 12, 32, .3) 42%, rgba(8, 12, 32, 0) 72%),
-              linear-gradient(180deg, rgba(6, 12, 30, 0) 42%, rgba(6, 12, 30, .45) 100%); }
-.s-cover::before { background: linear-gradient(90deg, rgba(8, 12, 32, .28) 0%, rgba(8, 12, 32, 0) 60%), linear-gradient(180deg, rgba(6, 12, 30, 0) 50%, rgba(6, 12, 30, .3) 100%) !important; }
+/* затемнение выходит за сцену на ширину/высоту кадра — иначе в окне не 16:9 видны полосы; стопы в px сцены (+1920 / +1080) */
+.slide[data-tone="dark"]::before { content: ""; position: absolute; inset: -1080px -1920px; pointer-events: none; z-index: -1;
+  background: linear-gradient(90deg, rgba(8, 12, 32, .5) 1920px, rgba(8, 12, 32, .3) 2726px, rgba(8, 12, 32, 0) 3302px),
+              linear-gradient(180deg, rgba(6, 12, 30, 0) 1534px, rgba(6, 12, 30, .45) 2160px); }
+.s-cover::before { background: linear-gradient(90deg, rgba(8, 12, 32, .28) 1920px, rgba(8, 12, 32, 0) 3072px), linear-gradient(180deg, rgba(6, 12, 30, 0) 1620px, rgba(6, 12, 30, .3) 2160px) !important; }
 .slide[data-scene="land"]::before { display: none; }
 
 .kicker { display: flex; align-items: center; gap: 16px; font: 500 24px/1 var(--mono); color: var(--fg2); letter-spacing: .01em; }
@@ -216,7 +217,7 @@ code { font-family: var(--mono); font-size: .92em; padding: 2px 10px; border-rad
 .exp-lead { margin-top: 26px; font-size: 34px; color: var(--fg2); max-width: none; }
 .exp-lead b { color: var(--fg); }
 .stats { position: absolute; left: 120px; right: 120px; top: 470px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px; }
-.stat { display: block; font: 600 150px/1 var(--mono); letter-spacing: -.05em; color: var(--acc); }
+.stat { display: block; font: 600 132px/1 var(--mono); letter-spacing: -.05em; color: var(--acc); }
 .stats b { display: block; font-size: 32px; font-weight: 640; margin-top: 14px; }
 .stats p { font-size: 25px; line-height: 1.34; color: var(--fg2); margin-top: 6px; max-width: 470px; }
 .exp-next { position: absolute; left: 120px; bottom: 132px; max-width: 1560px; font-size: 26px; color: var(--fg2); }
@@ -239,6 +240,17 @@ code { font-family: var(--mono); font-size: .92em; padding: 2px 10px; border-rad
   box-shadow: 0 50px 100px -40px rgba(0, 0, 0, .7); }
 .qr img { display: block; width: 100%; image-rendering: pixelated; }
 .qr figcaption { margin-top: 18px; font: 500 19px/1.2 var(--mono); color: var(--ink); }
+
+/* 17б инструкция */
+.guide-list { list-style: none; margin-top: 56px; display: grid; gap: 26px; max-width: 760px; }
+.guide-list li { font-size: 26px; line-height: 1.3; color: var(--fg2); padding-left: 30px; position: relative; }
+.guide-list li::before { content: ""; position: absolute; left: 0; top: .42em; width: 12px; height: 12px; border-radius: 50%; background: var(--dawn); }
+.guide-list b { display: block; font-size: 34px; font-weight: 600; color: var(--fg); letter-spacing: -.01em; margin-bottom: 2px; }
+.guide-pages { position: absolute; left: 930px; top: 250px; width: 440px; height: 640px; }
+.gp { position: absolute; width: 400px; border-radius: 10px; box-shadow: 0 40px 80px -30px rgba(0, 0, 0, .75); }
+.gp1 { left: 0; top: 30px; transform: rotate(-6deg); }
+.gp2 { left: 70px; top: 0; transform: rotate(5deg); opacity: .92; }
+.s-guide .qr figcaption { font-size: 17px; line-height: 1.35; }
 
 /* 18 источники */
 .sources { margin-top: 44px; columns: 2; column-gap: 80px; font-size: 24px; line-height: 1.4; color: var(--fg2); padding-left: 32px; max-width: 1680px; }

@@ -90,18 +90,20 @@
   }
   var cloudVS = [
     "attribute vec3 iPos; attribute vec2 iSize; attribute vec4 iUV; attribute float iA; attribute float iSeed;",
-    "uniform float uTime; varying vec2 vUv; varying float vA; varying float vDist;",
+    "uniform float uTime; varying vec2 vUv; varying vec2 vLoc; varying float vA; varying float vDist;",
     "void main(){ vec3 p=iPos; p.x+=sin(uTime*0.04+iSeed*6.2831)*0.8;",
     " vec4 mv=viewMatrix*vec4(p,1.0); mv.xy+=position.xy*iSize; gl_Position=projectionMatrix*mv;",
-    " vUv=mix(iUV.xy,iUV.zw,uv); vA=iA; vDist=-mv.z; }"].join("\n");
+    " vUv=mix(iUV.xy,iUV.zw,uv); vLoc=uv; vA=iA; vDist=-mv.z; }"].join("\n");
   var cloudFS = [
     "uniform sampler2D map; uniform vec3 uLight,uShade,uFog; uniform float uFogNear,uFogFar,uN0,uN1,uF0,uF1,uOpacity;",
-    "varying vec2 vUv; varying float vA; varying float vDist;",
+    "varying vec2 vUv; varying vec2 vLoc; varying float vA; varying float vDist;",
     "void main(){ vec4 t=texture2D(map,vUv); float l=dot(t.rgb,vec3(0.333));",
     " vec3 col=mix(uShade,uLight,smoothstep(0.32,0.95,l));",
     " col=mix(col,uLight,(1.0-t.a)*0.85);",
     " float f=smoothstep(uFogNear,uFogFar,vDist); col=mix(col,uFog,f*0.9);",
     " float a=t.a*vA*uOpacity*smoothstep(uN0,uN1,vDist)*(1.0-smoothstep(uF0,uF1,vDist));",
+    // у «гряды» в атласе непрозрачные боковые края — гасим их, иначе виден вертикальный шов
+    " a*=smoothstep(0.0,0.16,vLoc.x)*smoothstep(0.0,0.16,1.0-vLoc.x);",
     " if(a<0.004) discard; gl_FragColor=vec4(col,a);",
     " #include <colorspace_fragment>",
     "}"].join("\n");

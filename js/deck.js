@@ -34,7 +34,7 @@
   function tod(i) { return parseFloat(slides[i].dataset.tod || "0"); }
   function isLand(i) { return slides[i] && slides[i].dataset.scene === "land"; }
   function camZ(i) { return -i * (W.SPACING || 60); }
-  function camY(i) { return isLand(i) ? -26 : (slides[i].classList.contains("s-final") || slides[i].classList.contains("s-src") ? 5 : 0); }
+  function camY(i) { return isLand(i) ? -26 : (slides[i].classList.contains("s-final") || slides[i].classList.contains("s-guide") || slides[i].classList.contains("s-src") ? 5 : 0); }
 
   /* ---------- самолётик = сообщение бота ----------
      Сложить лист — отправить, раскрыть — прочитать. Ярлык рядом говорит, что и кому
@@ -291,6 +291,14 @@
       tag(t, a + 0.6, "ссылка на бота → вам");
       var e = fly(t, a, [{ x: 960, y: 380, d: 34, s: 0.6 }, { x: 1180, y: 560, d: 14, s: 0.8 }, { x: q.x, y: q.y, d: 8, s: 1.35 }], 2.4);
       touchdown(t, e, q.x, q.y, function (tt, a2) { tt.fromTo(qr, { opacity: 0, scale: 0.86 }, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.6)" }, a2); });
+    },
+    guide: function (t, at, el) { // инструкция: самолётик раскрывается в QR-код на неё
+      var qr = el.querySelector(".qr"), q = pt(qr, 0.5, 0.55);
+      var a = at + 1.0;
+      arrive(t, a, { x: 820, y: 300, d: 30, s: 0.6 });
+      tag(t, a + 0.6, "инструкция → всем пользователям");
+      var e = fly(t, a, [{ x: 820, y: 300, d: 30, s: 0.6 }, { x: 1250, y: 470, d: 14, s: 0.85 }, { x: q.x, y: q.y, d: 8, s: 1.35 }], 2.3);
+      touchdown(t, e, q.x, q.y, function (tt, a2) { tt.fromTo(qr, { opacity: 0, scale: 0.86 }, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.6)" }, a2); });
     }
   };
   function showMail(el) { // без WebGL: всё доставлено сразу
@@ -351,7 +359,8 @@
     var rb = el.querySelector(".route-map"); if (rb) routeAnim(t, 0.7, rb);
     el.querySelectorAll("[data-count]:not([data-mail-count])").forEach(function (c) {
       var o = { v: 0 }, to = parseFloat(c.dataset.count), pre = c.dataset.prefix || "", suf = c.dataset.suffix || "";
-      t.to(o, { v: to, duration: 1.8, ease: "power2.out", onUpdate: function () { c.textContent = pre + fmt(o.v) + suf; } }, 0.35);
+      var lo = c.dataset.lo ? parseFloat(c.dataset.lo) : null; // диапазон «80–90%»: обе границы растут вместе
+      t.to(o, { v: to, duration: 1.8, ease: "power2.out", onUpdate: function () { c.textContent = pre + (lo === null ? "" : fmt(o.v * lo / to) + "–") + fmt(o.v) + suf; } }, 0.35);
     });
     return t;
   }
